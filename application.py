@@ -1,6 +1,7 @@
 from flask import Flask, render_template, url_for, request, flash, redirect
 from forms import SearchPlayerForm, SearchTeamForm
 from secrets import *
+
 application = Flask(__name__)
 application.config['SECRET_KEY'] = SECRET_KEY
 
