@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+    <!-- <div class="text-center">
+        <div class="input-group">
+            <div class="form-outline">
+                <input id="search-input" type="search" id="form1" class="form-control" />
+                <label class="form-label" for="form1">Search</label>
+            </div>
+            <button id="search-button" type="button" class="btn btn-success">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </div> -->
+    <form method="POST" action="">
+        {{form.hidden_tag()}}
+        <fieldset>
+            <div class="form-group">
+                {{form.name.label(class="form-control-label")}}
+                {{form.name(class="form-control from-control-lg")}}
+            </div>
+        </fieldset>
+        <div class="form-group">
+            {{form.submit(class="btn btn-outline-info")}}
+        </div>
+    </form>
+</div>
+{% endblock content %}
