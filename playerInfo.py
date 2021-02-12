@@ -21,6 +21,7 @@ def getPlayerInfo(player_id):
     response = requests.request(
         "GET", url, headers=headers, params=querystring)
     data = response.json()
+    print(data)
 
     playerGoals = 0
     for i in range(len(data['data']['stats']['data'])):
@@ -42,4 +43,4 @@ def getPlayerInfo(player_id):
     print(df)
 
 
-getPlayerInfo(580)
+# getPlayerInfo(184941)
