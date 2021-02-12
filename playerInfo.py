@@ -21,26 +21,33 @@ def getPlayerInfo(player_id):
     response = requests.request(
         "GET", url, headers=headers, params=querystring)
     data = response.json()
-    print(data)
 
-    playerGoals = 0
+    playerGoals = playerAssists = playerMinutes = playerPasses = playerTackles = 0
     for i in range(len(data['data']['stats']['data'])):
-        playerGoals += data['data']['stats']['data'][i]['goals']
-
-    playerAssists = 0
-    for i in range(len(data['data']['stats']['data'])):
-        playerAssists += data['data']['stats']['data'][i]['assists']
+        try: 
+            playerGoals += data['data']['stats']['data'][i]['goals']
+            playerAssists += data['data']['stats']['data'][i]['assists']
+            playerMinutes += data['data']['stats']['data'][i]['minutes']
+            playerPasses += data['data']['stats']['data'][i]['passes']['total']
+            playerTackles += data['data']['stats']['data'][i]['tackles']
+        except:
+            playerPasses += 0
+            playerTackles += 0
     
+       
     formatted_data = [['Name', data['data']['display_name']],
                       ['Nationality', data['data']['nationality']],
                       ['Birth Date', data['data']['birthdate']],
                       ['Height', data['data']['height']],
                       ['Weight', data['data']['weight']],
                       ['Goals', playerGoals],
-                      ['Assists', playerAssists]]
+                      ['Assists', playerAssists],
+                      ['Minutes', playerMinutes],
+                      ['Passes', playerPasses],
+                      ['Tackles', playerTackles]]
 
     df = pd.DataFrame(formatted_data, columns=['Attribute', 'Value'])
     print(df)
 
 
-# getPlayerInfo(184941)
+getPlayerInfo(184941)
