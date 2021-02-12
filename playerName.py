@@ -8,8 +8,7 @@ from secrets import PLAYER_KEY
 
 
 def getPlayerName(name):
-    url = "https://football-pro.p.rapidapi.com/api/v2.0/players/search/{}".format(
-        name)
+    url = "https://football-pro.p.rapidapi.com/api/v2.0/players/search/{}".format(name)
 
     querystring = {"tz": "Europe/Amsterdam"}
 
@@ -22,12 +21,11 @@ def getPlayerName(name):
         "GET", url, headers=headers, params=querystring)  #
 
     data = response.json()['data']
-    print(data)
     player_id = data[0]['player_id']
     return player_id
 
-
-""" print(getPlayerName('ronaldo')) """
+getPlayerName('Lionel%20Messi')
+# (getPlayerName('ronaldo'))
 
 
 def getPlayers(name):
@@ -53,6 +51,5 @@ def getPlayers(name):
                        "nationality": player['nationality']}
         player_ids.append(player_info)
     return player_ids
-
 
 # print(getPlayers('neymar'))

@@ -21,14 +21,25 @@ def getPlayerInfo(player_id):
     response = requests.request(
         "GET", url, headers=headers, params=querystring)
     data = response.json()
+
+    playerGoals = 0
+    for i in range(len(data['data']['stats']['data'])):
+        playerGoals += data['data']['stats']['data'][i]['goals']
+
+    playerAssists = 0
+    for i in range(len(data['data']['stats']['data'])):
+        playerAssists += data['data']['stats']['data'][i]['assists']
+    
     formatted_data = [['Name', data['data']['display_name']],
                       ['Nationality', data['data']['nationality']],
                       ['Birth Date', data['data']['birthdate']],
                       ['Height', data['data']['height']],
-                      ['Weight', data['data']['weight']]]
+                      ['Weight', data['data']['weight']],
+                      ['Goals', playerGoals],
+                      ['Assists', playerAssists]]
 
     df = pd.DataFrame(formatted_data, columns=['Attribute', 'Value'])
     print(df)
 
 
-getPlayerInfo(184798)
+getPlayerInfo(580)
