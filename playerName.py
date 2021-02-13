@@ -25,7 +25,7 @@ def getPlayerName(name):
     player_id = data[0]['player_id']
     return player_id
 
-print(getPlayerName('Sergio Ramos'))
+# print(getPlayerName('Sergio Ramos'))
 
 
 def getPlayers(name):
