@@ -21,24 +21,26 @@ def getPlayerInfo(player_id):
     response = requests.request(
         "GET", url, headers=headers, params=querystring)
     data = response.json()
+    player_data = data['data']['stats']['data']
+    position_id = data['data']['position_id']
     
     playerGoals = playerAssists = playerMinutes = playerPasses = playerTackles = 0
     goalieSaves = goalieCleansheets = 0
 
-    if(data['data']['position_id'] == 1):
-        for i in range(len(data['data']['stats']['data'])):
+    if (position_id == 1):
+        for i in range(len(player_data)):
             try: 
-                goalieSaves += data['data']['stats']['data'][i]['saves']
-                goalieCleansheets += data['data']['stats']['data'][i]['cleansheets']
-                playerMinutes += data['data']['stats']['data'][i]['minutes']
-                playerPasses += data['data']['stats']['data'][i]['passes']['total']
-                playerTackles += data['data']['stats']['data'][i]['tackles']
+                goalieSaves += player_data[i]['saves']
+                goalieCleansheets += player_data[i]['cleansheets']
+                playerMinutes += player_data[i]['minutes']
+                playerPasses += player_data[i]['passes']['total']
+                playerTackles += player_data[i]['tackles']
             except:
                 playerPasses += 0
                 playerTackles += 0
         
         
-        formatted_data = [['Name', data['data']['display_name']],
+        player_dataframe = [['Name', data['data']['display_name']],
                         ['Nationality', data['data']['nationality']],
                         ['Birth Date', data['data']['birthdate']],
                         ['Height', data['data']['height']],
@@ -49,19 +51,19 @@ def getPlayerInfo(player_id):
                         ['Passes', playerPasses],
                         ['Tackles', playerTackles]]
     else:
-        for i in range(len(data['data']['stats']['data'])):
+        for i in range(len(player_data)):
             try: 
-                playerGoals += data['data']['stats']['data'][i]['goals']
-                playerAssists += data['data']['stats']['data'][i]['assists']
-                playerMinutes += data['data']['stats']['data'][i]['minutes']
-                playerPasses += data['data']['stats']['data'][i]['passes']['total']
-                playerTackles += data['data']['stats']['data'][i]['tackles']
+                playerGoals += player_data[i]['goals']
+                playerAssists += player_data[i]['assists']
+                playerMinutes += player_data[i]['minutes']
+                playerPasses += player_data[i]['passes']['total']
+                playerTackles += player_data[i]['tackles']
             except:
                 playerPasses += 0
                 playerTackles += 0
         
         
-        formatted_data = [['Name', data['data']['display_name']],
+        player_dataframe = [['Name', data['data']['display_name']],
                         ['Nationality', data['data']['nationality']],
                         ['Birth Date', data['data']['birthdate']],
                         ['Height', data['data']['height']],
@@ -72,9 +74,9 @@ def getPlayerInfo(player_id):
                         ['Passes', playerPasses],
                         ['Tackles', playerTackles]]
 
-    df = pd.DataFrame(formatted_data, columns=['Attribute', 'Value'])
+    df = pd.DataFrame(player_dataframe, columns=['Attribute', 'Value'])
     print(df)
 
 
-# getPlayerInfo(184941)
-getPlayerInfo(186029)
+getPlayerInfo(184941)
+# getPlayerInfo(186029)
