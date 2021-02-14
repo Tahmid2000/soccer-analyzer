@@ -1,3 +1,18 @@
+<<<<<<< HEAD
+=======
+/venv
+.vscode/settings.json
+/.vscode
+secrets.py
+__pycache__/secrets.cpython-38.pyc
+__pycache__/forms.cpython-38.pyc
+__pycache__/playerName.cpython-38.pyc
+__pycache__/secrets.cpython-38.pyc
+__pycache__/forms.cpython-38.pyc
+__pycache__/secrets.cpython-38.pyc
+__pycache__/forms.cpython-38.pyc
+__pycache__
+>>>>>>> af89e8f8e7841e6f1a3cd4b36325c90524d47a82
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
