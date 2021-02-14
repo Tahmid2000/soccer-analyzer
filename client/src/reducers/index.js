@@ -10,11 +10,19 @@ const playersReducer = (state = [], action) => {
 };
 
 const selectedPlayersReducer = (selectedPlayers = [], action) => {
-  if (action.type === "PLAYER_SELECTED") return action.payload;
-  return selectedPlayers;
+  switch (action.type) {
+    case "PLAYER_SELECTED":
+      return [...selectedPlayers, action.payload];
+    case "PLAYER_REMOVED":
+      return selectedPlayers.filter(
+        player => player.player_id !== action.payload.player_id
+      );
+    default:
+      return selectedPlayers;
+  }
 };
 
 export default combineReducers({
   players: playersReducer,
-  selectedPlayer: selectedPlayersReducer
+  selectedPlayers: selectedPlayersReducer
 });

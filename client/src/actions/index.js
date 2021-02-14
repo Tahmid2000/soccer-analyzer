@@ -5,3 +5,17 @@ export const fetchPlayers = term => {
     dispatch({ type: "FETCH_PLAYERS", payload: response.data });
   };
 };
+
+export const selectPlayer = player => {
+  return {
+    type: "PLAYER_SELECTED",
+    payload: player
+  };
+};
+
+export const removePlayer = player => {
+  return {
+    type: "PLAYER_REMOVED",
+    payload: player
+  };
+};
