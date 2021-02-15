@@ -20,7 +20,7 @@ class PlayerCard extends React.Component {
         </div>
         <div className="card-content">
           {this.props.player_name.length > 25 ? (
-            <span className="card-title" style={{ fontSize: "140%" }}>
+            <span className="card-title truncate">
               {this.props.player_name}
             </span>
           ) : (

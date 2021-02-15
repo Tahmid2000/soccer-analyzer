@@ -4,15 +4,19 @@ from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .utils.playerName import getPlayers
+from .utils.playerInfo import getPlayerInfo
 from .serializers import PlayerSerializer
 from .models import Player, Search
-from django.db.models import Q
+from django.db.models import Q, F
+from django.utils.timezone import utc
+import datetime
 
 
 @api_view(['GET'])
 def apiOverview(request):
     api_urls = {
-        'Players': '/players/<str:pk>/'
+        'Players': '/players/<str:pk>/',
+        'PlayerStats': 'player/stats/<int:id>'
     }
     return Response(api_urls)
 
@@ -33,4 +37,20 @@ def players(request, pk):
     players = Player.objects.filter(
         Q(player_name__icontains=pk.lower())).order_by('clicks')[:50]
     serializer = PlayerSerializer(players, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def playerStats(request, id):
+    player1 = Player.objects.filter(player_id=id).first()
+    timediff = 0
+    if player1.last_updated:
+        now = datetime.datetime.utcnow().replace(tzinfo=utc)
+        timediff = (now - player1.last_updated).days
+    if not player1.last_updated or timediff >= 2:
+        stats = getPlayerInfo(id)
+        Player.objects.filter(player_id=id).update(clicks=F('clicks') + 1, team_id=stats['team_id'], country_id=stats['country_id'], position_id=stats['position_id'], birthdate=stats['birthdate'], height=stats['height'], weight=stats['weight'], appearances=stats['appearances'], goals=stats['goals'], assists=stats['assists'], yellow_cards=stats['yellow_cards'],
+                                                   red_cards=stats['red_cards'], tackles=stats['tackles'], fouls_committed=stats['fouls_committed'], total_passes=stats['total_passes'], pass_accuracy=stats['pass_accuracy'], saves=stats['saves'], clean_sheets=stats['clean_sheets'], penalties_saved=stats['penalties_saved'], last_updated=datetime.datetime.now())
+    player = Player.objects.filter(player_id=id).first()
+    serializer = PlayerSerializer(player)
     return Response(serializer.data)
