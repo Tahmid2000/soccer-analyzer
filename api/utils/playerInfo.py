@@ -51,6 +51,7 @@ def getPlayerInfo(player_id):
         "GET", url, headers=headers, params=querystring)
     data = response.json()
     player_data = data['data']['stats']['data']
+    print(player_data[4]['saves'])
 
     appearances = goals = assists = yellow_cards = red_cards = tackles = fouls_committed = total_passes = pass_accuracy = saves = clean_sheets = penalties_saved = 0
 
@@ -80,6 +81,9 @@ def getPlayerInfo(player_id):
 
     df = pd.DataFrame(player_dataframe, index=index).to_dict()[0]
     print(df)
+    return df
 
 
-getPlayerInfo(184941)
+''' getPlayerInfo(184941) '''
+getPlayerInfo(31284) # Ter Stegen
+
