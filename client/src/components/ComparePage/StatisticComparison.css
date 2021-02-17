@@ -1,0 +1,14 @@
+.better {
+    background-color: #40916c;
+    padding: .5rem
+}
+
+.worse {
+    background-color: #ed474a;
+    padding: .5rem
+}
+
+.neutral {
+    background-color: #EEB902;
+    padding: .5rem
+}

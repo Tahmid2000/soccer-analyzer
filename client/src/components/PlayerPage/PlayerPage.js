@@ -1,7 +1,7 @@
 import React from "react";
 import SearchBar from "../SearchBar";
 import PlayerList from "./PlayerList";
-import Loading from "../Loading";
+import LoadingLine from "../LoadingLine";
 import M from "materialize-css";
 import SelectedPlayers from "./SelectedPlayers";
 import { fetchPlayers } from "../../actions";
@@ -33,7 +33,7 @@ class PlayerPage extends React.Component {
         <h1 className="center-align">Compare Players</h1>
         <SelectedPlayers />
         <SearchBar onSubmit={this.searchFunction} />
-        {this.state.loading === true ? <Loading /> : this.renderSearch()}
+        {this.state.loading === true ? <LoadingLine /> : this.renderSearch()}
       </div>
     );
   }

@@ -1,7 +1,7 @@
 import requests
 import pandas as pd
 import json
-from secrets import PLAYER_KEY
+from .secrets import PLAYER_KEY
 
 # Takes player ID as input and returns nominal information of player in pandas dataframe
 # DEV NOTE: Still need to consolidate and compute player statistics
@@ -31,7 +31,7 @@ def convertWeight(weight):
 
 def convertDate(date):
     if date is None:
-        return "2000-10-07"
+        return "1900-10-07"
     toConvert = date.split("/")
     return toConvert[2] + "-" + toConvert[1] + "-" + toConvert[0]
 
@@ -64,7 +64,7 @@ def getPlayerInfo(player_id):
             penalties_saved += player_data[i]['penalties']['saves']
         except:
             pass_accuracy += 0
-    
+
     pass_accuracy = pass_accuracy / count
 
     for i in range(len(player_data)):
@@ -83,10 +83,9 @@ def getPlayerInfo(player_id):
             tackles += 0
 
     player_dataframe = [data['data']['team_id'],
-                        data['data']['country_id'], data['data']['position_id'], convertDate(data['data']['birthdate']), convertHeight(data['data']['height']), convertWeight(data['data']['weight']), appearances, goals, assists, yellow_cards, red_cards, tackles, fouls_committed, total_passes, pass_accuracy , saves, clean_sheets, penalties_saved]
+                        data['data']['country_id'], data['data']['position_id'], convertDate(data['data']['birthdate']), convertHeight(data['data']['height']), convertWeight(data['data']['weight']), appearances, goals, assists, yellow_cards, red_cards, tackles, fouls_committed, total_passes, pass_accuracy, saves, clean_sheets, penalties_saved]
     index = ['team_id', 'country_id', 'position_id', 'birthdate', 'height', 'weight', 'appearances', 'goals', 'assists', 'yellow_cards', 'red_cards',
              'tackles', 'fouls_committed', 'total_passes', 'pass_accuracy', 'saves', 'clean_sheets', 'penalties_saved']
 
     df = pd.DataFrame(player_dataframe, index=index).to_dict()[0]
     return df
-
