@@ -15,7 +15,8 @@ class Player(models.Model):
     clicks = models.IntegerField(default=0)  # initial data
     team_id = models.IntegerField(default=None, blank=True, null=True)
     country_id = models.IntegerField(default=None, blank=True, null=True)
-    position_id = models.IntegerField(default=None, blank=True, null=True)
+    #position_id = models.IntegerField(default=None, blank=True, null=True)
+    position = models.CharField(max_length=200)
     birthdate = models.DateField(default=None, blank=True, null=True)
     height = models.IntegerField(default=None, blank=True, null=True)
     weight = models.IntegerField(default=None, blank=True, null=True)
@@ -43,3 +44,7 @@ class Search(models.Model):
 
     def __str__(self):
         return self.searchquery
+
+
+class Team(models.Model):
+    team_id = models.IntegerField()
