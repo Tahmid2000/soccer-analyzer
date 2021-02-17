@@ -51,9 +51,21 @@ def getPlayerInfo(player_id):
         "GET", url, headers=headers, params=querystring)
     data = response.json()
     player_data = data['data']['stats']['data']
-    print(player_data[4]['saves'])
 
-    appearances = goals = assists = yellow_cards = red_cards = tackles = fouls_committed = total_passes = pass_accuracy = saves = clean_sheets = penalties_saved = 0
+    appearances = goals = assists = yellow_cards = red_cards = tackles = fouls_committed = total_passes = pass_accuracy = saves = clean_sheets = penalties_saved = count = 0
+
+    for i in range(len(player_data)):
+        try:
+            if (player_data[i]['passes']['accuracy'] > 1):
+                pass_accuracy += player_data[i]['passes']['accuracy']
+                count += 1
+            saves += player_data[i]['saves']
+            clean_sheets += player_data[i]['cleansheets']
+            penalties_saved += player_data[i]['penalties']['saves']
+        except:
+            pass_accuracy += 0
+    
+    pass_accuracy = pass_accuracy / count
 
     for i in range(len(player_data)):
         try:
@@ -66,24 +78,15 @@ def getPlayerInfo(player_id):
             tackles += player_data[i]['tackles']
             fouls_committed += player_data[i]['fouls']['committed']
             total_passes += player_data[i]['passes']['total']
-            pass_accuracy += player_data[i]['passes']['accurate']
-            saves += player_data[i]['saves']
-            clean_sheets += player_data[i]['cleansheets']
-            penalties_saved += player_data[i]['penalties']['saves']
         except:
             total_passes += 0
             tackles += 0
 
     player_dataframe = [data['data']['team_id'],
-                        data['data']['country_id'], data['data']['position_id'], convertDate(data['data']['birthdate']), convertHeight(data['data']['height']), convertWeight(data['data']['weight']), appearances, goals, assists, yellow_cards, red_cards, tackles, fouls_committed, total_passes, pass_accuracy, saves, clean_sheets, penalties_saved]
+                        data['data']['country_id'], data['data']['position_id'], convertDate(data['data']['birthdate']), convertHeight(data['data']['height']), convertWeight(data['data']['weight']), appearances, goals, assists, yellow_cards, red_cards, tackles, fouls_committed, total_passes, pass_accuracy , saves, clean_sheets, penalties_saved]
     index = ['team_id', 'country_id', 'position_id', 'birthdate', 'height', 'weight', 'appearances', 'goals', 'assists', 'yellow_cards', 'red_cards',
              'tackles', 'fouls_committed', 'total_passes', 'pass_accuracy', 'saves', 'clean_sheets', 'penalties_saved']
 
     df = pd.DataFrame(player_dataframe, index=index).to_dict()[0]
-    print(df)
     return df
-
-
-''' getPlayerInfo(184941) '''
-getPlayerInfo(31284) # Ter Stegen
 
