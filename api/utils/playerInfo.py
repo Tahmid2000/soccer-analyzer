@@ -31,7 +31,7 @@ def convertWeight(weight):
 
 def convertDate(date):
     if date is None:
-        return "2000-10-07"
+        return "1900-10-07"
     toConvert = date.split("/")
     return toConvert[2] + "-" + toConvert[1] + "-" + toConvert[0]
 

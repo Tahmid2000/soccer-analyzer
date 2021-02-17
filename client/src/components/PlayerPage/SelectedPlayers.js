@@ -1,18 +1,24 @@
 import React from "react";
 import { connect } from "react-redux";
 import { removePlayer } from "../../actions";
+import { Link } from "react-router-dom";
 class SelectedPlayers extends React.Component {
   compareButton = () => {
     if (this.props.selectedPlayers.length == 2) {
       return (
-        <div className="center-align">
-          <a
-            className="waves-effect waves-light btn-large"
-            style={{ backgroundColor: "#40916c", color: "white" }}
-          >
-            <strong>COMPARE</strong>
-          </a>
-        </div>
+        <Link
+          to={`/compare/player/${this.props.selectedPlayers[0].player_id}/${this.props.selectedPlayers[1].player_id}`}
+          exact
+        >
+          <div className="center-align">
+            <a
+              className="waves-effect waves-light btn-large"
+              style={{ backgroundColor: "#40916c", color: "white" }}
+            >
+              <strong>COMPARE</strong>
+            </a>
+          </div>
+        </Link>
       );
     }
     return "";
