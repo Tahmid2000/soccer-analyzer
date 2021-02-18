@@ -16,6 +16,7 @@ def playerRating(player_id):
     tackles_ratio = df['tackles'] / appearances
     yellow_cards_ratio = df['yellow_cards'] / appearances
     red_cards_ratio = df['red_cards'] / appearances
+    # dribnles, crosses, duels, key passes, fouls committed
 
     # Goalkeepers Rating
     if (df['position_id'] == 1):
