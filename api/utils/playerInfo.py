@@ -1,7 +1,7 @@
 import requests
 import pandas as pd
 import json
-from .secrets import PLAYER_KEY
+from secrets import PLAYER_KEY
 
 # Takes player ID as input and returns nominal information of player in pandas dataframe
 # DEV NOTE: Still need to consolidate and compute player statistics
@@ -134,8 +134,8 @@ def getPlayerInfo(player_id):
         duels_ratio /= duelsCount
 
     player_dataframe = [data['data']['team_id'],
-                        data['data']['country_id'], position, convertDate(data['data']['birthdate']), convertHeight(data['data']['height']), convertWeight(data['data']['weight']), appearances, goals, assists, yellow_cards, red_cards, tackles, fouls_committed, total_passes, pass_accuracy, saves, clean_sheets, penalties_saved, dribble_ratio, successful_dribbles, cross_ratio, successful_crosses, duels_ratio, successful_duels, key_passes]
-    index = ['team_id', 'country_id', 'position', 'birthdate', 'height', 'weight', 'appearances', 'goals', 'assists', 'yellow_cards', 'red_cards',
+                        data['data']['country_id'], position, data['data']['position_id'], convertDate(data['data']['birthdate']), convertHeight(data['data']['height']), convertWeight(data['data']['weight']), appearances, goals, assists, yellow_cards, red_cards, tackles, fouls_committed, total_passes, pass_accuracy, saves, clean_sheets, penalties_saved, dribble_ratio, successful_dribbles, cross_ratio, successful_crosses, duels_ratio, successful_duels, key_passes]
+    index = ['team_id', 'country_id', 'position', 'position_id', 'birthdate', 'height', 'weight', 'appearances', 'goals', 'assists', 'yellow_cards', 'red_cards',
              'tackles', 'fouls_committed', 'total_passes', 'pass_accuracy', 'saves', 'clean_sheets', 'penalties_saved', 'dribble_ratio', 'successful_dribbles', 'cross_ratio', 'successful_crosses', 'duels_ratio', 'successful_duels', 'key_passes']
 
     df = pd.DataFrame(player_dataframe, index=index).to_dict()[0]
