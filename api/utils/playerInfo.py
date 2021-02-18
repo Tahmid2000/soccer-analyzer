@@ -73,7 +73,10 @@ def getPlayerInfo(player_id):
         except:
             pass_accuracy += 0
 
-    pass_accuracy = pass_accuracy / count
+    if count == 0:
+        pass_accuracy = 0
+    else:
+        pass_accuracy = pass_accuracy / count
     dribbleCount = crossCount = duelsCount = 0
     for i in range(len(player_data)):
         try:
@@ -117,9 +120,18 @@ def getPlayerInfo(player_id):
             dribble_ratio += 0
             cross_ratio += 0
             duels_ratio += 0
-    dribble_ratio /= dribbleCount
-    cross_ratio /= crossCount
-    duels_ratio /= duelsCount
+    if dribbleCount == 0:
+        dribble_ratio = 0
+    else:
+        dribble_ratio /= dribbleCount
+    if crossCount == 0:
+        cross_ratio = 0
+    else:
+        cross_ratio /= crossCount
+    if duelsCount == 0:
+        duels_ratio = 0
+    else:
+        duels_ratio /= duelsCount
 
     player_dataframe = [data['data']['team_id'],
                         data['data']['country_id'], position, convertDate(data['data']['birthdate']), convertHeight(data['data']['height']), convertWeight(data['data']['weight']), appearances, goals, assists, yellow_cards, red_cards, tackles, fouls_committed, total_passes, pass_accuracy, saves, clean_sheets, penalties_saved, dribble_ratio, successful_dribbles, cross_ratio, successful_crosses, duels_ratio, successful_duels, key_passes]

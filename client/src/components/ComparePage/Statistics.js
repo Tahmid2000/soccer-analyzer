@@ -82,7 +82,7 @@ class Statistics extends React.Component {
             type=">"
           />
           <StatisticComparison
-            stat="Dribbles / Attempted"
+            stat="Dribble Accuracy"
             playerOneStat={this.props.playerOne.dribble_ratio.toFixed(3)}
             playerTwoStat={this.props.playerTwo.dribble_ratio.toFixed(3)}
             type=">"
@@ -100,7 +100,7 @@ class Statistics extends React.Component {
             type=">"
           />
           <StatisticComparison
-            stat="Crosses / Attempted"
+            stat="Cross Accuracy"
             playerOneStat={this.props.playerOne.cross_ratio.toFixed(3)}
             playerTwoStat={this.props.playerTwo.cross_ratio.toFixed(3)}
             type=">"
@@ -159,7 +159,7 @@ class Statistics extends React.Component {
             type=">"
           />
           <StatisticComparison
-            stat="Duels / Attempted"
+            stat="Duel Accuracy"
             playerOneStat={this.props.playerOne.duels_ratio.toFixed(3)}
             playerTwoStat={this.props.playerTwo.duels_ratio.toFixed(3)}
             type=">"

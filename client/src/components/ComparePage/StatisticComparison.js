@@ -21,7 +21,7 @@ class StatisticComparison extends React.Component {
           <div className="col s2"></div>
           <div className="col s3">
             <div
-              className={`z-depth-3 ${this.compare(
+              className={`z-depth-1 ${this.compare(
                 this.props.playerOneStat,
                 this.props.playerTwoStat
               )}`}
@@ -32,7 +32,7 @@ class StatisticComparison extends React.Component {
           <div className="col s2"></div>
           <div className="col s3">
             <div
-              className={`z-depth-3 ${this.compare(
+              className={`z-depth-1 ${this.compare(
                 this.props.playerTwoStat,
                 this.props.playerOneStat
               )}`}
