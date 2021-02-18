@@ -52,11 +52,19 @@ def getPlayerInfo(player_id):
     data = response.json()
     player_data = data['data']['stats']['data']
 
-    appearances = goals = assists = yellow_cards = red_cards = tackles = fouls_committed = total_passes = pass_accuracy = saves = clean_sheets = penalties_saved = count = 0
-
+    appearances = goals = assists = yellow_cards = red_cards = tackles = fouls_committed = total_passes = pass_accuracy = saves = clean_sheets = penalties_saved = dribble_ratio = successful_dribbles = cross_ratio = successful_crosses = duels_ratio = successful_duels = key_passes = count = 0
+    position = "Unknown Position"
+    if data['data']['position_id'] == 1:
+        position = "Goalkeeper"
+    elif data['data']['position_id'] == 2:
+        position = "Defender"
+    elif data['data']['position_id'] == 3:
+        position = "Midfielder"
+    elif data['data']['position_id'] == 4:
+        position = "Attacker"
     for i in range(len(player_data)):
         try:
-            if (player_data[i]['passes']['accuracy'] > 1):
+            if player_data[i]['passes']['accuracy'] > 0:
                 pass_accuracy += player_data[i]['passes']['accuracy']
                 count += 1
             saves += player_data[i]['saves']
@@ -66,26 +74,57 @@ def getPlayerInfo(player_id):
             pass_accuracy += 0
 
     pass_accuracy = pass_accuracy / count
-
+    dribbleCount = crossCount = duelsCount = 0
     for i in range(len(player_data)):
         try:
             appearances += player_data[i]['appearences']
             goals += player_data[i]['goals']
             assists += player_data[i]['assists']
             yellow_cards += player_data[i]['yellowcards']
-            red_cards += player_data[i]['redcards'] + \
-                player_data[i]['yellowred']
+            red_cards += (player_data[i]['redcards'] +
+                          player_data[i]['yellowred'])
             tackles += player_data[i]['tackles']
             fouls_committed += player_data[i]['fouls']['committed']
             total_passes += player_data[i]['passes']['total']
+            if player_data[i]['dribbles']['attempts'] > 0:
+                if player_data[i]['dribbles']['success'] == 0:
+                    dribble_ratio += 0
+                else:
+                    dribble_ratio += (player_data[i]["dribbles"]["success"] /
+                                      player_data[i]["dribbles"]["attempts"])
+                dribbleCount += 1
+            successful_dribbles += player_data[i]["dribbles"]["success"]
+            if player_data[i]["crosses"]["total"] > 0:
+                if player_data[i]["crosses"]["accurate"] == 0:
+                    cross_ratio += 0
+                else:
+                    cross_ratio += (player_data[i]["crosses"]["accurate"] /
+                                    player_data[i]["crosses"]["total"])
+                crossCount += 1
+            successful_crosses += player_data[i]["crosses"]["accurate"]
+            if player_data[i]["duels"]["total"] > 0:
+                if player_data[i]["duels"]["won"] == 0:
+                    duels_ratio += 0
+                else:
+                    duels_ratio += (player_data[i]["duels"]["won"] /
+                                    player_data[i]["duels"]["total"])
+                duelsCount += 1
+            successful_duels += player_data[i]["duels"]["won"]
+            key_passes += player_data[i]["passes"]["key_passes"]
         except:
             total_passes += 0
             tackles += 0
+            dribble_ratio += 0
+            cross_ratio += 0
+            duels_ratio += 0
+    dribble_ratio /= dribbleCount
+    cross_ratio /= crossCount
+    duels_ratio /= duelsCount
 
     player_dataframe = [data['data']['team_id'],
-                        data['data']['country_id'], data['data']['position_id'], convertDate(data['data']['birthdate']), convertHeight(data['data']['height']), convertWeight(data['data']['weight']), appearances, goals, assists, yellow_cards, red_cards, tackles, fouls_committed, total_passes, pass_accuracy, saves, clean_sheets, penalties_saved]
-    index = ['team_id', 'country_id', 'position_id', 'birthdate', 'height', 'weight', 'appearances', 'goals', 'assists', 'yellow_cards', 'red_cards',
-             'tackles', 'fouls_committed', 'total_passes', 'pass_accuracy', 'saves', 'clean_sheets', 'penalties_saved']
+                        data['data']['country_id'], position, convertDate(data['data']['birthdate']), convertHeight(data['data']['height']), convertWeight(data['data']['weight']), appearances, goals, assists, yellow_cards, red_cards, tackles, fouls_committed, total_passes, pass_accuracy, saves, clean_sheets, penalties_saved, dribble_ratio, successful_dribbles, cross_ratio, successful_crosses, duels_ratio, successful_duels, key_passes]
+    index = ['team_id', 'country_id', 'position', 'birthdate', 'height', 'weight', 'appearances', 'goals', 'assists', 'yellow_cards', 'red_cards',
+             'tackles', 'fouls_committed', 'total_passes', 'pass_accuracy', 'saves', 'clean_sheets', 'penalties_saved', 'dribble_ratio', 'successful_dribbles', 'cross_ratio', 'successful_crosses', 'duels_ratio', 'successful_duels', 'key_passes']
 
     df = pd.DataFrame(player_dataframe, index=index).to_dict()[0]
     return df

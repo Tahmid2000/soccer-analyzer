@@ -15,8 +15,10 @@ class Player(models.Model):
     clicks = models.IntegerField(default=0)  # initial data
     team_id = models.IntegerField(default=None, blank=True, null=True)
     country_id = models.IntegerField(default=None, blank=True, null=True)
-    #position_id = models.IntegerField(default=None, blank=True, null=True)
-    position = models.CharField(max_length=200)
+    position_id = models.IntegerField(default=None, blank=True, null=True)
+    player_rating = models.FloatField(default=None, blank=True, null=True)
+    position = models.CharField(
+        max_length=200, default=None, blank=True, null=True)
     birthdate = models.DateField(default=None, blank=True, null=True)
     height = models.IntegerField(default=None, blank=True, null=True)
     weight = models.IntegerField(default=None, blank=True, null=True)
@@ -28,10 +30,20 @@ class Player(models.Model):
     tackles = models.IntegerField(default=None, blank=True, null=True)
     fouls_committed = models.IntegerField(default=None, blank=True, null=True)
     total_passes = models.IntegerField(default=None, blank=True, null=True)
-    pass_accuracy = models.IntegerField(default=None, blank=True, null=True)
+    pass_accuracy = models.FloatField(default=None, blank=True, null=True)
     saves = models.IntegerField(default=None, blank=True, null=True)
     clean_sheets = models.IntegerField(default=None, blank=True, null=True)
     penalties_saved = models.IntegerField(default=None, blank=True, null=True)
+    dribble_ratio = models.FloatField(default=None, blank=True, null=True)
+    successful_dribbles = models.IntegerField(
+        default=None, blank=True, null=True)
+    cross_ratio = models.FloatField(default=None, blank=True, null=True)
+    successful_crosses = models.IntegerField(
+        default=None, blank=True, null=True)
+    duels_ratio = models.FloatField(default=None, blank=True, null=True)
+    successful_duels = models.IntegerField(
+        default=None, blank=True, null=True)
+    key_passes = models.IntegerField(default=None, blank=True, null=True)
     last_updated = models.DateTimeField(
         default=None, blank=True, null=True)  # initial data
 

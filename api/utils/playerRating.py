@@ -5,33 +5,45 @@ from .playerInfo import *
 def playerRating(player_id):
 
     df = getPlayerInfo(player_id)
-    print(df)
+
+    appearances = df['appearances']
+    goals_ratio = df['goals'] / appearances
+    assists_ratio = df['assists'] / appearances
+    total_passes_ratio = df['total_passes'] / appearances
+    saves_ratio = df['saves'] / appearances
+    clean_sheets_ratio = df['clean_sheets'] / appearances
+    penalties_saved_ratio = df['penalties_saved'] / appearances
+    tackles_ratio = df['tackles'] / appearances
+    yellow_cards_ratio = df['yellow_cards'] / appearances
+    red_cards_ratio = df['red_cards'] / appearances
 
     # Goalkeepers Rating
     if (df['position_id'] == 1):
-        weighted_rating = (df['saves'] * 1) + (df['clean_sheets'] * 5) + (df['appearances'] * 0.05) + (
-            df['total_passes'] * 0.015) + (df['yellow_cards'] * -0.5) + (df['red_cards'] * -0.8) + (df['penalties_saved'] * 0.3)
+        weighted_rating = (saves_ratio * 100) + (clean_sheets_ratio * 200) + (penalties_saved_ratio * 15) + \
+            (df['pass_accuracy'] * 10) + \
+            (yellow_cards_ratio * -50) + (red_cards_ratio * -100)
 
     # Defenders Rating
     elif (df['position_id'] == 2):
-        weighted_rating = (df['goals'] * 1) + (df['assists'] * 0.5) + (df['appearances'] * 0.05) + (
-            df['total_passes'] * 0.015) + (df['yellow_cards'] * -0.5) + (df['red_cards'] * -0.8) + (df['tackles'] * 0.3)
+        weighted_rating = (tackles_ratio * 50) + (clean_sheets_ratio * 30) + (total_passes_ratio * 3) + (
+            df['pass_accuracy'] * 10) + (yellow_cards_ratio * -50) + (red_cards_ratio * -100)
 
     # Midfielders Rating
     elif (df['position_id'] == 3):
-        weighted_rating = (df['goals'] * 1) + (df['assists'] * 0.5) + (df['appearances'] * 0.05) + (
-            df['total_passes'] * 0.015) + (df['yellow_cards'] * -0.5) + (df['red_cards'] * -0.8) + (df['tackles'] * 0.3)
+        weighted_rating = (goals_ratio * 90) + (assists_ratio * 110) + (total_passes_ratio * 7) + (
+            df['pass_accuracy'] * 10) + (yellow_cards_ratio * -50) + (red_cards_ratio * -100)
 
     # Strikers/Wingers Rating
     elif (df['position_id'] == 4):
-        weighted_rating = (df['goals'] * 1) + (df['assists'] * 0.5) + (df['appearances'] * 0.05) + (
-            df['total_passes'] * 0.015) + (df['yellow_cards'] * -0.5) + (df['red_cards'] * -0.8) + (df['tackles'] * 0.3)
+        weighted_rating = (goals_ratio * 110) + (assists_ratio * 100) + (total_passes_ratio * 5) + (
+            df['pass_accuracy'] * 10) + (yellow_cards_ratio * -50) + (red_cards_ratio * -100)
 
-    print(weighted_rating)
+    final_rating = round((weighted_rating / 100), 2)
+    return final_rating
 
 
 # playerRating(580) # Cristiano Ronaldo
-playerRating(184798)  # Lionel Messi
+# playerRating(184798) # Lionel Messi
 # playerRating(184941) # Sergio Ramos
 # playerRating(30594) # Alex Sandro
 # playerRating(186029) # Keylor Navas

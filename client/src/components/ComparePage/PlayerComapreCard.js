@@ -27,7 +27,10 @@ class PlayerCompareCard extends React.Component {
             </span>
           )}
           <p>
-            <i>Position ID: {this.props.player.position_id}</i>
+            <i>{this.props.player.position}</i>
+          </p>
+          <p>
+            <i>Team ID: {this.props.player.team_id}</i>
           </p>
           <p>
             <i>{this.props.player.nationality}</i>
@@ -41,16 +44,12 @@ class PlayerCompareCard extends React.Component {
           <p>
             <i>{this.props.player.weight} pounds</i>
           </p>
-          <p>
-            <i>Team ID: {this.props.player.team_id}</i>
-          </p>
-          <p>
-            <i>Country ID: {this.props.player.country_id}</i>
-          </p>
         </div>
       </div>
     );
   }
 }
-
+/* <p>
+  <i>Country ID: {this.props.player.country_id}</i>
+</p> */
 export default PlayerCompareCard;

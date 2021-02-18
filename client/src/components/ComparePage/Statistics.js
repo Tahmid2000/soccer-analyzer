@@ -49,13 +49,11 @@ class Statistics extends React.Component {
           />
           <StatisticComparison
             stat="Pass Accuracy"
-            playerOneStat={this.typeSelector(
-              this.props.playerOne.pass_accuracy,
-              this.props.playerOne.appearances
+            playerOneStat={(this.props.playerOne.pass_accuracy / 100).toFixed(
+              3
             )}
-            playerTwoStat={this.typeSelector(
-              this.props.playerTwo.pass_accuracy,
-              this.props.playerTwo.appearances
+            playerTwoStat={(this.props.playerTwo.pass_accuracy / 100).toFixed(
+              3
             )}
             type=">"
           />
@@ -67,6 +65,54 @@ class Statistics extends React.Component {
             )}
             playerTwoStat={this.typeSelector(
               this.props.playerTwo.total_passes,
+              this.props.playerTwo.appearances
+            )}
+            type=">"
+          />
+          <StatisticComparison
+            stat="Crosses"
+            playerOneStat={this.typeSelector(
+              this.props.playerOne.key_passes,
+              this.props.playerOne.appearances
+            )}
+            playerTwoStat={this.typeSelector(
+              this.props.playerTwo.key_passes,
+              this.props.playerTwo.appearances
+            )}
+            type=">"
+          />
+          <StatisticComparison
+            stat="Dribbles / Attempted"
+            playerOneStat={this.props.playerOne.dribble_ratio.toFixed(3)}
+            playerTwoStat={this.props.playerTwo.dribble_ratio.toFixed(3)}
+            type=">"
+          />
+          <StatisticComparison
+            stat="Total Dribbles"
+            playerOneStat={this.typeSelector(
+              this.props.playerOne.successful_dribbles,
+              this.props.playerOne.appearances
+            )}
+            playerTwoStat={this.typeSelector(
+              this.props.playerTwo.successful_dribbles,
+              this.props.playerTwo.appearances
+            )}
+            type=">"
+          />
+          <StatisticComparison
+            stat="Crosses / Attempted"
+            playerOneStat={this.props.playerOne.cross_ratio.toFixed(3)}
+            playerTwoStat={this.props.playerTwo.cross_ratio.toFixed(3)}
+            type=">"
+          />
+          <StatisticComparison
+            stat="Total Crosses"
+            playerOneStat={this.typeSelector(
+              this.props.playerOne.successful_crosses,
+              this.props.playerOne.appearances
+            )}
+            playerTwoStat={this.typeSelector(
+              this.props.playerTwo.successful_crosses,
               this.props.playerTwo.appearances
             )}
             type=">"
@@ -108,6 +154,24 @@ class Statistics extends React.Component {
             )}
             playerTwoStat={this.typeSelector(
               this.props.playerTwo.clean_sheets,
+              this.props.playerTwo.appearances
+            )}
+            type=">"
+          />
+          <StatisticComparison
+            stat="Duels / Attempted"
+            playerOneStat={this.props.playerOne.duels_ratio.toFixed(3)}
+            playerTwoStat={this.props.playerTwo.duels_ratio.toFixed(3)}
+            type=">"
+          />
+          <StatisticComparison
+            stat="Total Duels"
+            playerOneStat={this.typeSelector(
+              this.props.playerOne.successful_duels,
+              this.props.playerOne.appearances
+            )}
+            playerTwoStat={this.typeSelector(
+              this.props.playerTwo.successful_duels,
               this.props.playerTwo.appearances
             )}
             type=">"

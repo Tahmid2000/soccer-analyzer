@@ -42,15 +42,16 @@ def players(request, pk):
 
 @api_view(['GET'])
 def playerStats(request, id):
+    # return Response(getPlayerInfo(id))
     player1 = Player.objects.filter(player_id=id).first()
     timediff = 0
     if player1.last_updated:
         now = datetime.datetime.utcnow().replace(tzinfo=utc)
         timediff = (now - player1.last_updated).days
-    if not player1.last_updated or timediff >= 2:
+    if not player1.last_updated or timediff >= 2:  #
         stats = getPlayerInfo(id)
-        Player.objects.filter(player_id=id).update(team_id=stats['team_id'], country_id=stats['country_id'], position_id=stats['position_id'], birthdate=stats['birthdate'], height=stats['height'], weight=stats['weight'], appearances=stats['appearances'], goals=stats['goals'], assists=stats['assists'], yellow_cards=stats['yellow_cards'],
-                                                   red_cards=stats['red_cards'], tackles=stats['tackles'], fouls_committed=stats['fouls_committed'], total_passes=stats['total_passes'], pass_accuracy=stats['pass_accuracy'], saves=stats['saves'], clean_sheets=stats['clean_sheets'], penalties_saved=stats['penalties_saved'], last_updated=datetime.datetime.now())
+        Player.objects.filter(player_id=id).update(team_id=stats['team_id'], country_id=stats['country_id'], position=stats['position'], birthdate=stats['birthdate'], height=stats['height'], weight=stats['weight'], appearances=stats['appearances'], goals=stats['goals'], assists=stats['assists'], yellow_cards=stats['yellow_cards'],
+                                                   red_cards=stats['red_cards'], tackles=stats['tackles'], fouls_committed=stats['fouls_committed'], total_passes=stats['total_passes'], pass_accuracy=stats['pass_accuracy'], saves=stats['saves'], clean_sheets=stats['clean_sheets'], penalties_saved=stats['penalties_saved'], dribble_ratio=stats['dribble_ratio'], successful_dribbles=stats['successful_dribbles'], cross_ratio=stats['cross_ratio'], successful_crosses=stats['successful_crosses'], duels_ratio=stats['duels_ratio'], successful_duels=stats['successful_duels'], key_passes=stats['key_passes'], last_updated=datetime.datetime.now())
     Player.objects.filter(player_id=id).update(clicks=F('clicks') + 1)
     player = Player.objects.filter(player_id=id).first()
     serializer = PlayerSerializer(player)
