@@ -1,5 +1,5 @@
 import pandas as pd
-from .playerInfo import *
+from playerInfo import *
 
 
 def playerRating(player_id):
@@ -16,28 +16,32 @@ def playerRating(player_id):
     tackles_ratio = df['tackles'] / appearances
     yellow_cards_ratio = df['yellow_cards'] / appearances
     red_cards_ratio = df['red_cards'] / appearances
-    # dribnles, crosses, duels, key passes, fouls committed
+    fouls_committed_ratio = df['fouls_committed'] / appearances
+    key_passes = df['key_passes'] / appearances
+    duels_ratio = df['duels_ratio']
+    dribble_ratio = df['dribble_ratio']
+    cross_ratio = df['cross_ratio']
 
     # Goalkeepers Rating
     if (df['position_id'] == 1):
         weighted_rating = (saves_ratio * 100) + (clean_sheets_ratio * 200) + (penalties_saved_ratio * 15) + \
             (df['pass_accuracy'] * 10) + \
-            (yellow_cards_ratio * -50) + (red_cards_ratio * -100)
+            (yellow_cards_ratio * -50) + (red_cards_ratio * -100) + (fouls_committed_ratio * -50)
 
     # Defenders Rating
     elif (df['position_id'] == 2):
         weighted_rating = (tackles_ratio * 50) + (clean_sheets_ratio * 30) + (total_passes_ratio * 3) + (
-            df['pass_accuracy'] * 10) + (yellow_cards_ratio * -50) + (red_cards_ratio * -100)
+            df['pass_accuracy'] * 10) + (yellow_cards_ratio * -50) + (red_cards_ratio * -100) + (duels_ratio * 50) + (fouls_committed_ratio * -50)
 
     # Midfielders Rating
     elif (df['position_id'] == 3):
         weighted_rating = (goals_ratio * 90) + (assists_ratio * 110) + (total_passes_ratio * 7) + (
-            df['pass_accuracy'] * 10) + (yellow_cards_ratio * -50) + (red_cards_ratio * -100)
+            df['pass_accuracy'] * 10) + (yellow_cards_ratio * -50) + (red_cards_ratio * -100) + (dribble_ratio * 50) + (cross_ratio * 25) + (fouls_committed_ratio * -50)
 
     # Strikers/Wingers Rating
     elif (df['position_id'] == 4):
         weighted_rating = (goals_ratio * 110) + (assists_ratio * 100) + (total_passes_ratio * 5) + (
-            df['pass_accuracy'] * 10) + (yellow_cards_ratio * -50) + (red_cards_ratio * -100)
+            df['pass_accuracy'] * 10) + (yellow_cards_ratio * -50) + (red_cards_ratio * -100) + (dribble_ratio * 25) + (cross_ratio * 50) + (fouls_committed_ratio * -50)
 
     final_rating = round((weighted_rating / 100), 2)
     return final_rating
