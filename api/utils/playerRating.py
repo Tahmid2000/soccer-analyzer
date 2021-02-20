@@ -1,5 +1,5 @@
 import pandas as pd
-from playerInfo import *
+from .playerInfo import *
 
 
 def playerRating(player_id):
