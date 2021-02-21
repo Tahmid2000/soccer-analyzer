@@ -44,6 +44,7 @@ class Player(models.Model):
     successful_duels = models.IntegerField(
         default=None, blank=True, null=True)
     key_passes = models.IntegerField(default=None, blank=True, null=True)
+    graph_path = models.URLField(default=None, blank=True, null=True)
     last_updated = models.DateTimeField(
         default=None, blank=True, null=True)  # initial data
 

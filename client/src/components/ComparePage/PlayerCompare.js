@@ -24,6 +24,7 @@ class PlayerCompare extends React.Component {
     });
   };
   renderContent() {
+    console.log(this.state.playerTwo.graph_path);
     return (
       <React.Fragment>
         <h1 className="center-align">
@@ -33,6 +34,11 @@ class PlayerCompare extends React.Component {
           <div className="col s1"></div>
           <div className="col s3">
             <PlayerCompareCard player={this.state.playerOne} />
+            <img
+              style={{ marginLeft: "-80px" }}
+              src={this.state.playerOne.graph_path}
+              alt=""
+            />
           </div>
           <div className="col s4">
             <Statistics
@@ -42,6 +48,11 @@ class PlayerCompare extends React.Component {
           </div>
           <div className="col s3">
             <PlayerCompareCard player={this.state.playerTwo} />
+            <img
+              style={{ marginLeft: "-80px" }}
+              src={this.state.playerTwo.graph_path}
+              alt=""
+            />
           </div>
           <div className="col s1"></div>
         </div>

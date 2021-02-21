@@ -1,11 +1,9 @@
 import pandas as pd
-from .playerInfo import *
 
 
-def playerRating(player_id):
+def playerRating(df):
 
-    df = getPlayerInfo(player_id)
-
+    #df = getPlayerInfo(player_id)
     appearances = df['appearances']
     goals_ratio = df['goals'] / appearances
     assists_ratio = df['assists'] / appearances
@@ -26,7 +24,8 @@ def playerRating(player_id):
     if (df['position_id'] == 1):
         weighted_rating = (saves_ratio * 100) + (clean_sheets_ratio * 200) + (penalties_saved_ratio * 15) + \
             (df['pass_accuracy'] * 10) + \
-            (yellow_cards_ratio * -50) + (red_cards_ratio * -100) + (fouls_committed_ratio * -50)
+            (yellow_cards_ratio * -50) + (red_cards_ratio * -100) + \
+            (fouls_committed_ratio * -50)
 
     # Defenders Rating
     elif (df['position_id'] == 2):

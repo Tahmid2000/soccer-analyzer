@@ -1,10 +1,11 @@
 import pandas as pd
-from playerInfo import *
 import matplotlib.pyplot as plt
 import numpy as np
+from .aws import memory_to_aws
+import io
 
 
-def attackersGraph(df):
+def attackersGraph(df, player_id):
     appearances = df['appearances']
     goals_ratio = df['goals'] / appearances
     assists_ratio = df['assists'] / appearances
@@ -12,12 +13,12 @@ def attackersGraph(df):
     successful_dribbles_ratio = df['successful_dribbles'] / appearances
     successful_crosses_ratio = df['successful_crosses'] / appearances
 
-    fig = plt.figure()
+    plt.switch_backend('Agg')
+    fig = plt.figure(figsize=(5, 3))  # added figsize
     ax = fig.add_subplot(1, 1, 1)
     x = np.linspace(0, appearances + 200, 50)
     ax.xaxis.set_ticks_position('bottom')
     ax.yaxis.set_ticks_position('left')
-    xthresh = appearances
 
     below = x <= appearances
     above = x > appearances - 40
@@ -40,22 +41,28 @@ def attackersGraph(df):
     plt.ylabel('Statistics')
     plt.legend(loc='upper left')
     ax.set_facecolor('aliceblue')
-    plt.show()
+    plt.tight_layout()
+
+    img_data = io.BytesIO()
+    plt.savefig(img_data, format='png')
+    img_data.seek(0)
+    memory_to_aws(img_data, '%s.png' % player_id)
+    return 'https://socceranalyzer.s3.us-east-2.amazonaws.com/%s.png' % player_id
 
 
-def defendersGraph(df):
+def defendersGraph(df, player_id):
     appearances = df['appearances']
     tackles_ratio = df['tackles'] / appearances
     clean_sheets_ratio = df['clean_sheets'] / appearances
     successful_duels_ratio = df['successful_duels'] / appearances
     fouls_committed_ratio = df['fouls_committed'] / appearances
 
-    fig = plt.figure()
+    plt.switch_backend('Agg')
+    fig = plt.figure(figsize=(5, 3))
     ax = fig.add_subplot(1, 1, 1)
     x = np.linspace(0, appearances + 200, 50)
     ax.xaxis.set_ticks_position('bottom')
     ax.yaxis.set_ticks_position('left')
-    xthresh = appearances
 
     below = x <= appearances
     above = x > appearances - 40
@@ -75,21 +82,27 @@ def defendersGraph(df):
     plt.ylabel('Statistics')
     plt.legend(loc='upper left')
     ax.set_facecolor('aliceblue')
-    plt.show()
+    plt.tight_layout()
+
+    img_data = io.BytesIO()
+    plt.savefig(img_data, format='png')
+    img_data.seek(0)
+    memory_to_aws(img_data, '%s.png' % player_id)
+    return 'https://socceranalyzer.s3.us-east-2.amazonaws.com/%s.png' % player_id
 
 
-def keepersGraph(df):
+def keepersGraph(df, player_id):
     appearances = df['appearances']
     saves_ratio = df['saves'] / appearances
     clean_sheets_ratio = df['clean_sheets'] / appearances
     penalties_saved_ratio = df['penalties_saved'] / appearances
 
-    fig = plt.figure()
+    plt.switch_backend('Agg')
+    fig = plt.figure(figsize=(5, 3))
     ax = fig.add_subplot(1, 1, 1)
     x = np.linspace(0, appearances + 200, 50)
     ax.xaxis.set_ticks_position('bottom')
     ax.yaxis.set_ticks_position('left')
-    xthresh = appearances
 
     below = x <= appearances
     above = x > appearances - 40
@@ -106,32 +119,35 @@ def keepersGraph(df):
     plt.ylabel('Statistics')
     plt.legend(loc='upper left')
     ax.set_facecolor('aliceblue')
-    plt.show()
+    plt.tight_layout()
+
+    img_data = io.BytesIO()
+    plt.savefig(img_data, format='png')
+    img_data.seek(0)
+    memory_to_aws(img_data, '%s.png' % player_id)
+    return 'https://socceranalyzer.s3.us-east-2.amazonaws.com/%s.png' % player_id
 
 
-def playerGraphs(player_id):
-
-    df = getPlayerInfo(player_id)
+def playerGraphs(df, player_id):
 
     # Goalkeepers Rating
     if (df['position_id'] == 1):
-        keepersGraph(df)
+        return keepersGraph(df, player_id)
 
     # Defenders Rating
     elif (df['position_id'] == 2):
-        defendersGraph(df)
+        return defendersGraph(df, player_id)
 
     elif (df['position_id'] == 3):
-        attackersGraph(df)
+        return attackersGraph(df, player_id)
 
     # Strikers/Wingers Rating
-    # Goal ratio, assist ratio, successful dribbles ratio, successful crosses ratio, total passes ratio
     elif (df['position_id'] == 4):
-        attackersGraph(df)
+        return attackersGraph(df, player_id)
 
 
 # playerGraphs(580)  # Cristiano Ronaldo
 # playerGraphs(184798)  # Lionel Messi
-""" playerGraphs(184941) """  # Sergio Ramos
-playerGraphs(30594)  # Alex Sandro
+# playerGraphs(184941)  # Sergio Ramos
+# playerGraphs(30594)  # Alex Sandro
 # playerGraphs(186029)  # Keylor Navas

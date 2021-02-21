@@ -12,6 +12,12 @@ class Statistics extends React.Component {
       return (
         <React.Fragment>
           <StatisticComparison
+            stat="Rating"
+            playerOneStat={this.props.playerOne.player_rating}
+            playerTwoStat={this.props.playerTwo.player_rating}
+            type=">"
+          />
+          <StatisticComparison
             stat="Appearances"
             playerOneStat={this.typeSelector(
               this.props.playerOne.appearances,
@@ -70,7 +76,7 @@ class Statistics extends React.Component {
             type=">"
           />
           <StatisticComparison
-            stat="Crosses"
+            stat="Key Passes"
             playerOneStat={this.typeSelector(
               this.props.playerOne.key_passes,
               this.props.playerOne.appearances
@@ -122,6 +128,12 @@ class Statistics extends React.Component {
     } else if (this.state.quality === "defending") {
       return (
         <React.Fragment>
+          <StatisticComparison
+            stat="Rating"
+            playerOneStat={this.props.playerOne.player_rating}
+            playerTwoStat={this.props.playerTwo.player_rating}
+            type=">"
+          />
           <StatisticComparison
             stat="Appearances"
             playerOneStat={this.typeSelector(
@@ -217,6 +229,12 @@ class Statistics extends React.Component {
     } else {
       return (
         <React.Fragment>
+          <StatisticComparison
+            stat="Rating"
+            playerOneStat={this.props.playerOne.player_rating}
+            playerTwoStat={this.props.playerTwo.player_rating}
+            type=">"
+          />
           <StatisticComparison
             stat="Appearances"
             playerOneStat={this.typeSelector(
