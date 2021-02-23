@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-# Create your views here.
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .utils.playerName import getPlayers
 from .utils.playerInfo import getPlayerInfo
 from .utils.playerRating import playerRating
 from .utils.playerGraphs import playerGraphs
+from .utils.teamName import getTeams
+from .utils.teamH2H import teamsInfo
 from .serializers import PlayerSerializer
 from .models import Player, Search
 from django.db.models import Q, F
@@ -18,13 +19,17 @@ import datetime
 def apiOverview(request):
     api_urls = {
         'Players': '/players/<str:pk>/',
-        'PlayerStats': 'player/stats/<int:id>'
+        'PlayerStats': 'player/stats/<int:id>',
+        'Teams': '/teams/<str:pk>/',
+        'TeamH2H': 'teams/h2h/<int:id1>/<int:id2>'
     }
     return Response(api_urls)
 
 
 @api_view(['GET'])
 def players(request, pk):
+    if len(pk) < 4:
+        return Response(None)
     searches = Search.objects.filter(searchquery=pk.lower()).count()
     if searches == 0:
         newplayers = getPlayers(pk.lower())
@@ -60,3 +65,13 @@ def playerStats(request, id):
     player = Player.objects.filter(player_id=id).first()
     serializer = PlayerSerializer(player)
     return Response(serializer.data)
+
+
+@api_view(['GET'])
+def teams(request, pk):
+    return Response(getTeams(pk))
+
+
+@api_view(['GET'])
+def teamsH2H(request, id1, id2):
+    return Response(teamsInfo(id1, id2))
