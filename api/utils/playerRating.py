@@ -1,9 +1,10 @@
 import pandas as pd
+from .playerInfo import *
 
 
-def playerRating(df):
+def playerRating(player_id):
 
-    #df = getPlayerInfo(player_id)
+    df = getPlayerInfo(player_id)
     appearances = df['appearances']
     goals_ratio = df['goals'] / appearances
     assists_ratio = df['assists'] / appearances
@@ -29,8 +30,8 @@ def playerRating(df):
 
     # Defenders Rating
     elif (df['position_id'] == 2):
-        weighted_rating = (tackles_ratio * 50) + (clean_sheets_ratio * 30) + (total_passes_ratio * 3) + (
-            df['pass_accuracy'] * 10) + (yellow_cards_ratio * -50) + (red_cards_ratio * -100) + (duels_ratio * 50) + (fouls_committed_ratio * -50)
+        weighted_rating = (tackles_ratio * 1000) + (clean_sheets_ratio * 600) + (total_passes_ratio * 20) + (
+            yellow_cards_ratio * -50) + (red_cards_ratio * -100) + (duels_ratio * 2) + (fouls_committed_ratio * -30)
 
     # Midfielders Rating
     elif (df['position_id'] == 3):
@@ -43,6 +44,7 @@ def playerRating(df):
             df['pass_accuracy'] * 10) + (yellow_cards_ratio * -50) + (red_cards_ratio * -100) + (dribble_ratio * 25) + (cross_ratio * 50) + (fouls_committed_ratio * -50)
 
     final_rating = round((weighted_rating / 100), 2)
+    print(final_rating)
     return final_rating
 
 
@@ -51,3 +53,5 @@ def playerRating(df):
 # playerRating(184941) # Sergio Ramos
 # playerRating(30594) # Alex Sandro
 # playerRating(186029) # Keylor Navas
+# playerRating(1743) # Virgil van Dijk
+# playerRating(30642) # Maneul Neuer
