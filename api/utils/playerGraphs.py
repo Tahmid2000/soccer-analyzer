@@ -4,6 +4,8 @@ import numpy as np
 from .aws import memory_to_aws
 import io
 
+plt.rcParams["font.family"] = "Avenir"
+
 
 def attackersGraph(df, player_id):
     appearances = df['appearances']
@@ -42,7 +44,6 @@ def attackersGraph(df, player_id):
     plt.legend(loc='upper left')
     ax.set_facecolor('aliceblue')
     plt.tight_layout()
-
     img_data = io.BytesIO()
     plt.savefig(img_data, format='png')
     img_data.seek(0)
@@ -83,7 +84,6 @@ def defendersGraph(df, player_id):
     plt.legend(loc='upper left')
     ax.set_facecolor('aliceblue')
     plt.tight_layout()
-
     img_data = io.BytesIO()
     plt.savefig(img_data, format='png')
     img_data.seek(0)
@@ -120,7 +120,6 @@ def keepersGraph(df, player_id):
     plt.legend(loc='upper left')
     ax.set_facecolor('aliceblue')
     plt.tight_layout()
-
     img_data = io.BytesIO()
     plt.savefig(img_data, format='png')
     img_data.seek(0)
