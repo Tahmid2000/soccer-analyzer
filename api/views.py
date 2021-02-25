@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .utils.playerName import getPlayers
-from .utils.playerInfo import getPlayerInfo
+from .utils.playerInfo import getPlayerInfo, getTeam
 from .utils.playerRating import playerRating
 from .utils.playerGraphs import playerGraphs
 from .utils.teamName import getTeams
@@ -49,17 +49,17 @@ def players(request, pk):
 
 @api_view(['GET'])
 def playerStats(request, id):
-    # return Response(getPlayerInfo(id))
     player1 = Player.objects.filter(player_id=id).first()
     timediff = 0
     if player1.last_updated:
         now = datetime.datetime.utcnow().replace(tzinfo=utc)
         timediff = (now - player1.last_updated).days
-    if not player1.last_updated or timediff >= 1:
+    if not player1.last_updated or timediff >= 2:
         stats = getPlayerInfo(id)
-        player1_rating = playerRating(stats)
+        team_name = getTeam(stats['team_id'])
+        player1_rating = 0  # playerRating(stats)
         player1_graph = playerGraphs(stats, id)
-        Player.objects.filter(player_id=id).update(player_rating=player1_rating, team_id=stats['team_id'], country_id=stats['country_id'], position=stats['position'], birthdate=stats['birthdate'], height=stats['height'], weight=stats['weight'], appearances=stats['appearances'], goals=stats['goals'], assists=stats['assists'], yellow_cards=stats['yellow_cards'],
+        Player.objects.filter(player_id=id).update(player_rating=player1_rating, team_id=stats['team_id'], team_name=team_name, country_id=stats['country_id'], position=stats['position'], birthdate=stats['birthdate'], height=stats['height'], weight=stats['weight'], appearances=stats['appearances'], goals=stats['goals'], assists=stats['assists'], yellow_cards=stats['yellow_cards'],
                                                    red_cards=stats['red_cards'], tackles=stats['tackles'], fouls_committed=stats['fouls_committed'], total_passes=stats['total_passes'], pass_accuracy=stats['pass_accuracy'], saves=stats['saves'], clean_sheets=stats['clean_sheets'], penalties_saved=stats['penalties_saved'], dribble_ratio=stats['dribble_ratio'], successful_dribbles=stats['successful_dribbles'], cross_ratio=stats['cross_ratio'], successful_crosses=stats['successful_crosses'], duels_ratio=stats['duels_ratio'], successful_duels=stats['successful_duels'], key_passes=stats['key_passes'], graph_path=player1_graph, last_updated=datetime.datetime.now())
     Player.objects.filter(player_id=id).update(clicks=F('clicks') + 1)
     player = Player.objects.filter(player_id=id).first()

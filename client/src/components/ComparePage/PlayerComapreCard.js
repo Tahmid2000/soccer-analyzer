@@ -1,5 +1,5 @@
 import React from "react";
-
+import moment from "moment";
 class PlayerCompareCard extends React.Component {
   calculateAge = birthday => {
     // birthday is a date
@@ -30,19 +30,21 @@ class PlayerCompareCard extends React.Component {
             <i>{this.props.player.position}</i>
           </p>
           <p>
-            <i>Team ID: {this.props.player.team_id}</i>
+            <i>
+              {this.props.player.team_name} and {this.props.player.nationality}
+            </i>
           </p>
           <p>
-            <i>{this.props.player.nationality}</i>
+            <i>
+              {moment().diff(moment(this.props.player.birthdate), "years")}{" "}
+              years old
+            </i>
           </p>
           <p>
-            <i>{this.props.player.birthdate}</i>
-          </p>
-          <p>
-            <i>{this.props.player.height} inches</i>
-          </p>
-          <p>
-            <i>{this.props.player.weight} pounds</i>
+            <i>
+              {this.props.player.height} inches --- {this.props.player.weight}{" "}
+              pounds
+            </i>
           </p>
         </div>
       </div>

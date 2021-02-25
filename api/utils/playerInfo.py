@@ -1,7 +1,7 @@
 import requests
 import pandas as pd
 import json
-from .secrets import PLAYER_KEY
+from .secrets import PLAYER_KEY, TEAM_KEY
 
 # Takes player ID as input and returns nominal information of player in pandas dataframe
 # DEV NOTE: Still need to consolidate and compute player statistics
@@ -34,6 +34,25 @@ def convertDate(date):
         return "1900-10-07"
     toConvert = date.split("/")
     return toConvert[2] + "-" + toConvert[1] + "-" + toConvert[0]
+
+
+def getTeam(team_id):
+    if team_id is None:
+        return ""
+    url = "https://football-pro.p.rapidapi.com/api/v2.0/teams/{}".format(
+        team_id)
+
+    querystring = {"tz": "Europe/Amsterdam"}
+
+    headers = {
+        'x-rapidapi-key': TEAM_KEY,
+        'x-rapidapi-host': "football-pro.p.rapidapi.com"
+    }
+
+    response = requests.request(
+        "GET", url, headers=headers, params=querystring)
+    data = response.json()
+    return data['data']["name"]
 
 
 def getPlayerInfo(player_id):

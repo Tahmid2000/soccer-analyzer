@@ -14,6 +14,8 @@ class Player(models.Model):
     nationality = models.CharField(max_length=200)  # initial data
     clicks = models.IntegerField(default=0)  # initial data
     team_id = models.IntegerField(default=None, blank=True, null=True)
+    team_name = models.CharField(
+        default=None, blank=True, null=True, max_length=200)
     country_id = models.IntegerField(default=None, blank=True, null=True)
     position_id = models.IntegerField(default=None, blank=True, null=True)
     player_rating = models.FloatField(default=None, blank=True, null=True)
@@ -57,7 +59,3 @@ class Search(models.Model):
 
     def __str__(self):
         return self.searchquery
-
-
-class Team(models.Model):
-    team_id = models.IntegerField()

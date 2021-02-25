@@ -5,3 +5,8 @@
 .tabs .tab a {
     color: #74c69d
 }
+
+.tabs .tab a:hover,
+.tabs .tab a.active {
+    color: #40916c !important
+}
