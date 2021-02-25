@@ -8,8 +8,8 @@ from .utils.playerRating import playerRating
 from .utils.playerGraphs import playerGraphs
 from .utils.teamName import getTeams
 from .utils.teamH2H import teamsInfo
-from .serializers import PlayerSerializer
-from .models import Player, Search
+from .serializers import *
+from .models import *
 from django.db.models import Q, F
 from django.utils.timezone import utc
 import datetime
@@ -69,7 +69,23 @@ def playerStats(request, id):
 
 @api_view(['GET'])
 def teams(request, pk):
-    return Response(getTeams(pk))
+    if len(pk) < 4:
+        return Response(None)
+    searches = SearchTeam.objects.filter(searchquery=pk.lower()).count()
+    if searches == 0:
+        newTeams = getTeams(pk.lower())
+        for team in newTeams:
+            num = Team.objects.filter(team_id=team['team_id']).count()
+            if num == 0:
+                newTeam = Team(team_id=team['team_id'], team_name=team['team_name'],
+                                   image_path=team['image_path'], founded=team['founded'], country=team['country'], venue_name=team['venue_name'], clicks=0)
+                newTeam.save()
+        search = SearchTeam(searchquery=pk.lower())
+        search.save()
+    teams = Team.objects.filter(
+        Q(team_name__icontains=pk.lower())).order_by('-clicks')[:50]
+    serializer = TeamSerializer(team, many=True)
+    return Response(serializer.data)
 
 
 @api_view(['GET'])
