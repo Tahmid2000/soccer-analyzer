@@ -2,7 +2,6 @@ import React from "react";
 import SearchBar from "../SearchBar";
 import PlayerList from "./PlayerList";
 import LoadingLine from "../LoadingLine";
-import M from "materialize-css";
 import SelectedPlayers from "./SelectedPlayers";
 import { fetchPlayers } from "../../actions";
 import { connect } from "react-redux";
@@ -11,9 +10,6 @@ class PlayerPage extends React.Component {
     loading: false,
     searched: false
   };
-  /* componentDidMount() {
-    M.AutoInit();
-  } */
   searchFunction = async term => {
     this.setState({ loading: true });
     this.props

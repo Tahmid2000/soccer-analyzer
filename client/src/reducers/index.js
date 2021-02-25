@@ -4,6 +4,8 @@ const playersReducer = (state = [], action) => {
   switch (action.type) {
     case "FETCH_PLAYERS":
       return action.payload;
+    case "CLEAR_PLAYERS":
+      return [];
     default:
       return state;
   }
@@ -17,6 +19,8 @@ const selectedPlayersReducer = (selectedPlayers = [], action) => {
       return selectedPlayers.filter(
         player => player.player_id !== action.payload.player_id
       );
+    case "CLEAR_PLAYERS":
+      return [];
     default:
       return selectedPlayers;
   }

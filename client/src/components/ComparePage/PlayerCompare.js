@@ -4,10 +4,13 @@ import LoadingCircle from "../LoadingCircle";
 import PlayerCompareCard from "./PlayerComapreCard";
 import Statistics from "./Statistics";
 import { Link } from "react-router-dom";
+import { clearPlayers } from "../../actions";
+import { connect } from "react-redux";
 class PlayerCompare extends React.Component {
   state = { playerOne: [], playerTwo: [], loading: true };
   componentDidMount() {
     this.getData();
+    this.props.clearPlayers();
   }
 
   getData = async () => {
@@ -24,8 +27,6 @@ class PlayerCompare extends React.Component {
     });
   };
   renderContent() {
-    console.log(this.state.playerOne.clicks);
-    console.log(this.state.playerTwo.clicks);
     return (
       <React.Fragment>
         <h1 className="center-align">
@@ -74,5 +75,7 @@ class PlayerCompare extends React.Component {
     );
   }
 }
-
-export default PlayerCompare;
+const mapStateToProps = state => {
+  return {};
+};
+export default connect(mapStateToProps, { clearPlayers })(PlayerCompare);

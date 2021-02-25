@@ -17,7 +17,7 @@ def attackersGraph(df, player_id):
     successful_crosses_ratio = df['successful_crosses'] / appearances
 
     plt.switch_backend('Agg')
-    fig = plt.figure(figsize=(9, 6))  # added figsize
+    fig = plt.figure(figsize=(10, 7))  # added figsize
     ax = fig.add_subplot(1, 1, 1)
     x = np.linspace(0, appearances + 200, 50)
     ax.xaxis.set_ticks_position('bottom')
@@ -60,7 +60,7 @@ def defendersGraph(df, player_id):
     fouls_committed_ratio = df['fouls_committed'] / appearances
 
     plt.switch_backend('Agg')
-    fig = plt.figure(figsize=(9, 6))
+    fig = plt.figure(figsize=(10, 7))
     ax = fig.add_subplot(1, 1, 1)
     x = np.linspace(0, appearances + 200, 50)
     ax.xaxis.set_ticks_position('bottom')
@@ -99,7 +99,7 @@ def keepersGraph(df, player_id):
     penalties_saved_ratio = df['penalties_saved'] / appearances
 
     plt.switch_backend('Agg')
-    fig = plt.figure(figsize=(9, 6))
+    fig = plt.figure(figsize=(10, 7))
     ax = fig.add_subplot(1, 1, 1)
     x = np.linspace(0, appearances + 200, 50)
     ax.xaxis.set_ticks_position('bottom')

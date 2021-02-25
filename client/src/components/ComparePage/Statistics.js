@@ -286,7 +286,6 @@ class Statistics extends React.Component {
         </React.Fragment>
       );
     }
-    return "";
   };
   render() {
     return (

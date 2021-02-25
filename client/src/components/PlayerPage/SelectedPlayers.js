@@ -4,7 +4,7 @@ import { removePlayer } from "../../actions";
 import { Link } from "react-router-dom";
 class SelectedPlayers extends React.Component {
   compareButton = () => {
-    if (this.props.selectedPlayers.length == 2) {
+    if (this.props.selectedPlayers.length === 2) {
       return (
         <Link
           to={`/compare/player/${this.props.selectedPlayers[0].player_id}/${this.props.selectedPlayers[1].player_id}`}

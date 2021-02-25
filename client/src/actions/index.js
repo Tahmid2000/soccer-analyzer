@@ -19,3 +19,10 @@ export const removePlayer = player => {
     payload: player
   };
 };
+
+export const clearPlayers = () => {
+  return {
+    type: "CLEAR_PLAYERS",
+    payload: []
+  };
+};
