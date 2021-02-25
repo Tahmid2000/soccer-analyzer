@@ -1,7 +1,7 @@
 import requests
 import pandas as pd
 import json
-from .secrets import PLAYER_KEY, TEAM_KEY
+from secrets import PLAYER_KEY, TEAM_KEY
 
 # Takes player ID as input and returns nominal information of player in pandas dataframe
 # DEV NOTE: Still need to consolidate and compute player statistics
@@ -11,8 +11,8 @@ def convertHeight(height):
     if height is None:
         return 0
     toConvert = int(height.split(" ", 1)[0])
-    inches = toConvert*0.393701
-    feet = inches/12
+    inches = toConvert * 0.393701
+    feet = inches / 12
     i = 0
     while feet >= 1:
         i += 1
