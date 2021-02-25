@@ -78,13 +78,13 @@ def teams(request, pk):
             num = Team.objects.filter(team_id=team['team_id']).count()
             if num == 0:
                 newTeam = Team(team_id=team['team_id'], team_name=team['team_name'],
-                                   image_path=team['image_path'], founded=team['founded'], country=team['country'], venue_name=team['venue_name'], clicks=0)
+                               image_path=team['image_path'], founded=team['founded'], country=team['country'], venue_name=team['venue_name'], clicks=0)
                 newTeam.save()
         search = SearchTeam(searchquery=pk.lower())
         search.save()
     teams = Team.objects.filter(
         Q(team_name__icontains=pk.lower())).order_by('-clicks')[:50]
-    serializer = TeamSerializer(team, many=True)
+    serializer = TeamSerializer(teams, many=True)
     return Response(serializer.data)
 
 

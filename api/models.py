@@ -60,20 +60,27 @@ class Search(models.Model):
     def __str__(self):
         return self.searchquery
 
+
 class SearchTeam(models.Model):
     searchquery = models.CharField(max_length=200)
 
     def __str__(self):
         return self.searchquery
 
+
 class Team(models.Model):
-    team_id = models.IntegerField()
-    team_name = models.CharField(max_length=200)
-    image_path = models.URLField()
-    clicks = models.IntegerField(default=0)  # initial data 
-    founded = models.CharField(max_length=200)
-    country = models.CharField(max_length=200)
-    venue_name = models.CharField(max_length=200)
+    team_id = models.IntegerField(default=None, blank=True, null=True)
+    team_name = models.CharField(
+        max_length=200, default=None, blank=True, null=True)
+    image_path = models.URLField(default=None, blank=True, null=True)
+    # initial data
+    clicks = models.IntegerField(default=0,  blank=True, null=True)
+    founded = models.CharField(
+        max_length=200, default=None, blank=True, null=True)
+    country = models.CharField(
+        max_length=200, default=None, blank=True, null=True)
+    venue_name = models.CharField(
+        max_length=200, default=None, blank=True, null=True)
 
 
 class TeamH2HStats(models.Model):
@@ -88,10 +95,14 @@ class TeamH2HStats(models.Model):
     away_id1_draws = models.IntegerField(default=None, blank=True, null=True)
     home_id1_losses = models.IntegerField(default=None, blank=True, null=True)
     away_id1_losses = models.IntegerField(default=None, blank=True, null=True)
-    home_id1_goals_for = models.IntegerField(default=None, blank=True, null=True)
-    home_id1_goals_against = models.IntegerField(default=None, blank=True, null=True)
-    away_id1_goals_for = models.IntegerField(default=None, blank=True, null=True)
-    away_id1_goals_against = models.IntegerField(default=None, blank=True, null=True)
+    home_id1_goals_for = models.IntegerField(
+        default=None, blank=True, null=True)
+    home_id1_goals_against = models.IntegerField(
+        default=None, blank=True, null=True)
+    away_id1_goals_for = models.IntegerField(
+        default=None, blank=True, null=True)
+    away_id1_goals_against = models.IntegerField(
+        default=None, blank=True, null=True)
     home_id2_games = models.IntegerField(default=None, blank=True, null=True)
     away_id2_games = models.IntegerField(default=None, blank=True, null=True)
     home_id2_wins = models.IntegerField(default=None, blank=True, null=True)
@@ -100,27 +111,35 @@ class TeamH2HStats(models.Model):
     away_id2_draws = models.IntegerField(default=None, blank=True, null=True)
     home_id2_losses = models.IntegerField(default=None, blank=True, null=True)
     away_id2_losses = models.IntegerField(default=None, blank=True, null=True)
-    home_id2_goals_for = models.IntegerField(default=None, blank=True, null=True)
-    home_id2_goals_against = models.IntegerField(default=None, blank=True, null=True)
-    away_id2_goals_for = models.IntegerField(default=None, blank=True, null=True)
-    away_id2_goals_against = models.IntegerField(default=None, blank=True, null=True)
+    home_id2_goals_for = models.IntegerField(
+        default=None, blank=True, null=True)
+    home_id2_goals_against = models.IntegerField(
+        default=None, blank=True, null=True)
+    away_id2_goals_for = models.IntegerField(
+        default=None, blank=True, null=True)
+    away_id2_goals_against = models.IntegerField(
+        default=None, blank=True, null=True)
     id1_graph_path = models.URLField(default=None, blank=True, null=True)
     id2_graph_path = models.URLField(default=None, blank=True, null=True)
     toal_graph_path = models.URLField(default=None, blank=True, null=True)
     last_updated = models.DateTimeField(
         default=None, blank=True, null=True)
 
-   
+
 class TeamH2HFixtures(models.Model):
     id1 = models.IntegerField(default=None, blank=True, null=True)
     id2 = models.IntegerField(default=None, blank=True, null=True)
-    league = models.CharField(max_length=200, default=None, blank=True, null=True)
+    league = models.CharField(
+        max_length=200, default=None, blank=True, null=True)
     date = models.DateField(default=None, blank=True, null=True)
     fixture_round = models.IntegerField(default=None, blank=True, null=True)
-    status = models.CharField(max_length=200, default=None, blank=True, null=True)
-    venue = models.CharField(max_length=200, default=None, blank=True, null=True)
+    status = models.CharField(
+        max_length=200, default=None, blank=True, null=True)
+    venue = models.CharField(
+        max_length=200, default=None, blank=True, null=True)
     home_logo = models.URLField(default=None, blank=True, null=True)
     away_logo = models.URLField(default=None, blank=True, null=True)
-    score = models.CharField(max_length=200, default=None, blank=True, null=True)
+    score = models.CharField(
+        max_length=200, default=None, blank=True, null=True)
     last_updated = models.DateTimeField(
         default=None, blank=True, null=True)
