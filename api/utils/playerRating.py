@@ -44,13 +44,13 @@ def playerRating(player_id):
             df['pass_accuracy'] * 10) + (yellow_cards_ratio * -50) + (red_cards_ratio * -100) + (dribble_ratio * 25) + (cross_ratio * 50) + (fouls_committed_ratio * -50)
 
     x = round((weighted_rating / 100), 2)
-    clamp = lambda n, minn, maxn: max(min(maxn, n), minn)
+    def clamp(n, minn, maxn): return max(min(maxn, n), minn)
     final_rating = clamp(x, 0.0, 10.0)
 
     return final_rating
 
 
-playerRating(580) # Cristiano Ronaldo
+playerRating(580)  # Cristiano Ronaldo
 # playerRating(184798) # Lionel Messi
 # playerRating(184941) # Sergio Ramos
 # playerRating(30594) # Alex Sandro

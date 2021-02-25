@@ -1,7 +1,7 @@
 import requests
 import pandas as pd
 import json
-from secrets import PLAYER_KEY, TEAM_KEY
+from .secrets import PLAYER_KEY, TEAM_KEY
 
 # Takes player ID as input and returns nominal information of player in pandas dataframe
 # DEV NOTE: Still need to consolidate and compute player statistics
