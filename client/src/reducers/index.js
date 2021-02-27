@@ -13,9 +13,9 @@ const playersReducer = (state = [], action) => {
 
 const teamsReducer = (state = [], action) => {
   switch (action.type) {
-    case "FETCH_TEAM":
+    case "FETCH_TEAMS":
       return action.payload;
-    case "CLEAR_TEAM":
+    case "CLEAR_TEAMS":
       return [];
     default:
       return state;

@@ -131,8 +131,8 @@ class TeamH2HFixtures(models.Model):
     id2 = models.IntegerField(default=None, blank=True, null=True)
     league = models.CharField(
         max_length=200, default=None, blank=True, null=True)
-    date = models.DateField(default=None, blank=True, null=True)
-    fixture_round = models.IntegerField(default=None, blank=True, null=True)
+    date = models.DateTimeField(default=None, blank=True, null=True)
+    fixture_round = models.CharField(max_length=200, default=None, blank=True, null=True)
     status = models.CharField(
         max_length=200, default=None, blank=True, null=True)
     venue = models.CharField(

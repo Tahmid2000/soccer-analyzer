@@ -1,5 +1,5 @@
 import React from "react";
-import SearchBar from "../SearchBar";
+import PlayerSearchBar from "./PlayerSearchBar"
 import PlayerList from "./PlayerList";
 import LoadingLine from "../LoadingLine";
 import SelectedPlayers from "./SelectedPlayers";
@@ -28,7 +28,7 @@ class PlayerPage extends React.Component {
       <div className="container">
         <h1 className="center-align">Compare Players</h1>
         <SelectedPlayers />
-        <SearchBar onSubmit={this.searchFunction} />
+        <PlayerSearchBar onSubmit={this.searchFunction} />
         {this.state.loading === true ? <LoadingLine /> : this.renderSearch()}
       </div>
     );

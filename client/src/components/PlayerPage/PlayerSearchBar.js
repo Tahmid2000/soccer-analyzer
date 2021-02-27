@@ -1,6 +1,6 @@
 import React from "react";
 
-class SearchBar extends React.Component {
+class PlayerSearchBar extends React.Component {
   state = { term: "" };
   onFormSubmit = event => {
     event.preventDefault();
@@ -26,4 +26,4 @@ class SearchBar extends React.Component {
   }
 }
 
-export default SearchBar;
+export default PlayerSearchBar;

@@ -1,5 +1,5 @@
 import React from "react";
-import TeamSearchBar from "../TeamSearchBar";
+import TeamSearchBar from "./TeamSearchBar";
 import TeamList from "./TeamList";
 import LoadingLine from "../LoadingLine";
 import SelectedTeams from "./SelectedTeams";
@@ -24,6 +24,7 @@ class TeamPage extends React.Component {
     return <TeamList teams={this.props.teams} />;
   };
   render() {
+    console.log(this.props.teams);
     return (
       <div className="container">
         <h1 className="center-align">Compare Teams</h1>

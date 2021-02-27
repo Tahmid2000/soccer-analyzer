@@ -49,7 +49,7 @@ export const removeTeam = team => {
   };
 };
 
-export const clearTeamss = () => {
+export const clearTeams = () => {
   return {
     type: "CLEAR_TEAMS",
     payload: []
