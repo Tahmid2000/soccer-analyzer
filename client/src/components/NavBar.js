@@ -11,7 +11,7 @@ class NavBar extends React.Component {
         <nav style={{ backgroundColor: "#2d6a4f" }}>
           <div class="nav-wrapper">
             <div className="container">
-              <Link to="#" class="brand-logo">
+              <Link to="/" class="brand-logo">
                 Fútbol Analyzer
               </Link>
               <a href="#" data-target="mobile-demo" class="sidenav-trigger">
