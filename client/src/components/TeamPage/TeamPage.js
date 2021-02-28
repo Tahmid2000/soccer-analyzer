@@ -24,7 +24,6 @@ class TeamPage extends React.Component {
     return <TeamList teams={this.props.teams} />;
   };
   render() {
-    console.log(this.props.teams);
     return (
       <div className="container">
         <h1 className="center-align">Compare Teams</h1>

@@ -4,36 +4,37 @@ import TeamCompareCard from "./TeamCompareCard";
 import { clearTeams } from "../../actions";
 import { connect } from "react-redux";
 
-
 class TeamCompare extends React.Component {
-    state = { teams: [], loading: true};
-    componentDidMount() {
-        this.getData();
-        this.props.clearTeams();
-    }
+  state = { team1: [], team2: [], stats: [], fixtures: [], loading: true };
+  componentDidMount() {
+    this.getData();
+    this.props.clearTeams();
+  }
 
-    getData = async () => {
-        const response = await analyzer.get(
-            `/teams/h2h/${this.props.match.params.id1}/${this.props.match.params.id1}`
-        );
-        this.setState({ 
-            teams: response.data,
-            loading: false
-        });
-    };
-    render() {
-        console.log(this.state.teams.data);
-        return (
-            <React.Fragment>
-                <h1 className="center-align">
-                     {`${this.state.teams.data} vs. ${this.state.teams.data}`}
-                </h1>
-            </React.Fragment>
-        );
-    }
-};
-const mapStateToProps = state => {
-    return {};
+  getData = async () => {
+    const response = await analyzer.get(
+      `/teams/h2h/${this.props.match.params.id1}/${this.props.match.params.id2}`
+    );
+    console.log(response);
+    this.setState({
+      team1: response.data.data.team1,
+      team2: response.data.data.team2,
+      stats: response.data.data.stats,
+      fixtures: response.data.data.fixtures,
+      loading: false
+    });
   };
-  export default connect(mapStateToProps, { clearTeams })(TeamCompare);
-
+  render() {
+    return (
+      <React.Fragment>
+        <h1 className="center-align">
+          {`${this.state.team1.team_name} vs. ${this.state.team2.team_name}`}
+        </h1>
+      </React.Fragment>
+    );
+  }
+}
+const mapStateToProps = state => {
+  return {};
+};
+export default connect(mapStateToProps, { clearTeams })(TeamCompare);
