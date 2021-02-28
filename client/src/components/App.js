@@ -4,7 +4,8 @@ import PlayerPage from "./PlayerPage/PlayerPage";
 import TeamPage from "./TeamPage/TeamPage";
 import HomePage from "./HomePage/HomePage";
 import AboutPage from "./AboutPage/AboutPage";
-import PlayerCompare from "./ComparePage/PlayerCompare";
+import PlayerCompare from "./PlayerComparePage/PlayerCompare";
+import TeamCompare from "./TeamComparePage/TeamCompare";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 class App extends React.Component {
   render() {
@@ -21,6 +22,11 @@ class App extends React.Component {
               path="/compare/player/:id1/:id2"
               exact
               component={PlayerCompare}
+            ></Route>
+            <Route
+              path="/compare/team/:id1/:id2"
+              exact
+              component={TeamCompare}
             ></Route>
           </Switch>
         </React.Fragment>

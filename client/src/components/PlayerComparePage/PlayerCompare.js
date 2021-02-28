@@ -1,9 +1,8 @@
 import React from "react";
 import analyzer from "../../apis/analyzer";
 import LoadingCircle from "../LoadingCircle";
-import PlayerCompareCard from "./PlayerComapreCard";
+import PlayerCompareCard from "./PlayerCompareCard";
 import Statistics from "./Statistics";
-import { Link } from "react-router-dom";
 import { clearPlayers } from "../../actions";
 import { connect } from "react-redux";
 class PlayerCompare extends React.Component {
