@@ -10,6 +10,20 @@ class TeamCompareCard extends React.Component {
                         alt={this.props.team.team_name}
                     />
                 </div>
+                <div className="card-content center-align">
+                    <span className="card-title">
+                    <strong>{this.props.team.team_name}</strong>
+                    </span>
+                    <p>
+                        <i>{this.props.team.country}</i>
+                    </p>
+                    <p>
+                        <i>{this.props.team.venue_name}</i>
+                    </p>
+                    <p>
+                        <i>Founded {this.props.team.founded}</i>
+                    </p>
+                </div>
             </div>
         );
     }

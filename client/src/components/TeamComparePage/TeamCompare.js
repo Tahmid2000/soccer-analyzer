@@ -1,6 +1,7 @@
 import React from "react";
 import analyzer from "../../apis/analyzer";
 import TeamCompareCard from "./TeamCompareCard";
+import TeamStatistics from "./TeamStatistics";
 import { clearTeams } from "../../actions";
 import { connect } from "react-redux";
 
@@ -30,6 +31,19 @@ class TeamCompare extends React.Component {
         <h1 className="center-align">
           {`${this.state.team1.team_name} vs. ${this.state.team2.team_name}`}
         </h1>
+        <div className="row">
+            <div className="col s1"></div>
+            <div className="col c3 m3">
+                <TeamCompareCard team={this.state.team1}/>
+            </div>
+            <div className="col s4">
+                <TeamStatistics />
+            </div>
+            <div className="col s3 m3">
+                <TeamCompareCard team={this.state.team2}/>
+            </div>
+            <div className="col s1"></div>
+        </div>
       </React.Fragment>
     );
   }
