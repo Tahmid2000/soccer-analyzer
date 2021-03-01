@@ -2,6 +2,7 @@ import React from "react";
 import analyzer from "../../apis/analyzer";
 import TeamCompareCard from "./TeamCompareCard";
 import TeamStatistics from "./TeamStatistics";
+import LoadingCircle from "../LoadingCircle";
 import { clearTeams } from "../../actions";
 import { connect } from "react-redux";
 
@@ -35,6 +36,11 @@ class TeamCompare extends React.Component {
             <div className="col s1"></div>
             <div className="col c3 m3">
                 <TeamCompareCard team={this.state.team1}/>
+                <img
+                    className="responsive-img"
+                    src={this.state.stats.id1_graph_path}
+                    alt=""
+                />
             </div>
             <div className="col s4">
                 <TeamStatistics 
@@ -43,9 +49,27 @@ class TeamCompare extends React.Component {
             </div>
             <div className="col s3 m3">
                 <TeamCompareCard team={this.state.team2}/>
+                <img
+                    className="responsive-img"
+                    src={this.state.stats.id2_graph_path}
+                    alt=""
+                />
             </div>
             <div className="col s1"></div>
         </div>
+      </React.Fragment>
+    );
+  }
+  renderContent() {
+    return (
+      <React.Fragment>
+        {this.state.loading === true ? (
+          <div className="mt-5" style={{ marginTop: "100px" }}>
+            <LoadingCircle />
+          </div>
+        ) : (
+          this.renderContent()
+        )}
       </React.Fragment>
     );
   }
