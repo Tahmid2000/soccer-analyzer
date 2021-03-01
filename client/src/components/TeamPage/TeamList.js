@@ -3,7 +3,6 @@ import TeamCard from "./TeamCard";
 // import "./TeamList.css";
 class TeamList extends React.Component {
   render() {
-    console.log(this.props.teams);
     const renderedList = this.props.teams.map(team => {
       return (
         <div class="col s12 m6 l4">

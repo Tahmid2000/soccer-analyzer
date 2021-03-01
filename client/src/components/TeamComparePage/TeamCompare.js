@@ -16,7 +16,6 @@ class TeamCompare extends React.Component {
     const response = await analyzer.get(
       `/teams/h2h/${this.props.match.params.id1}/${this.props.match.params.id2}`
     );
-    console.log(response);
     this.setState({
       team1: response.data.data.team1,
       team2: response.data.data.team2,
@@ -37,7 +36,9 @@ class TeamCompare extends React.Component {
                 <TeamCompareCard team={this.state.team1}/>
             </div>
             <div className="col s4">
-                <TeamStatistics />
+                <TeamStatistics 
+                    teams={this.state.stats}
+                />
             </div>
             <div className="col s3 m3">
                 <TeamCompareCard team={this.state.team2}/>
