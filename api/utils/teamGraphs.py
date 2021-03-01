@@ -10,6 +10,7 @@ plt.rcParams["font.size"] = "22"
 
 
 def totalGraphs(df, id1, id2, team1, team2):
+    plt.switch_backend('Agg')
     fig1, axs = plt.subplots(2, 1, figsize=(11, 11))
 
     labels1 = '%s Home' % team1, '%s Away' % team1, '%s Home' % team2, '%s Away' % team2, '%s Home Draws' % team1, '%s Home Draws' % team2
@@ -36,11 +37,12 @@ def totalGraphs(df, id1, id2, team1, team2):
     img_data = io.BytesIO()
     plt.savefig(img_data, format='png')
     img_data.seek(0)
-    memory_to_aws(img_data, '%svs%stotal.png' % id1, id2)
-    return 'https://socceranalyzer.s3.us-east-2.amazonaws.com/%svs%stotal.png' % id1, id2
+    memory_to_aws(img_data, '{}vs{}total.png'.format(id1, id2))
+    return 'https://socceranalyzer.s3.us-east-2.amazonaws.com/{}vs{}total.png'.format(id1, id2)
 
 
 def team1Graphs(df, id1, id2, team1, team2):
+    plt.switch_backend('Agg')
     fig1, axs = plt.subplots(2, 1, figsize=(10, 7))
 
     labels1 = team1, team2, 'Draws'
@@ -65,11 +67,12 @@ def team1Graphs(df, id1, id2, team1, team2):
     img_data = io.BytesIO()
     plt.savefig(img_data, format='png')
     img_data.seek(0)
-    memory_to_aws(img_data, '%svs%shome.png' % id1, id2)
-    return 'https://socceranalyzer.s3.us-east-2.amazonaws.com/%svs%shome.png' % id1, id2
+    memory_to_aws(img_data, '{}vs{}home.png'.format(id1, id2))
+    return 'https://socceranalyzer.s3.us-east-2.amazonaws.com/{}vs{}home.png'.format(id1, id2)
 
 
 def team2Graphs(df, id1, id2, team1, team2):
+    plt.switch_backend('Agg')
     fig1, axs = plt.subplots(2, 1, figsize=(10, 7))
 
     labels1 = team2, team1, 'Draws'
@@ -94,8 +97,8 @@ def team2Graphs(df, id1, id2, team1, team2):
     img_data = io.BytesIO()
     plt.savefig(img_data, format='png')
     img_data.seek(0)
-    memory_to_aws(img_data, '%svs%saway.png' % id1, id2)
-    return 'https://socceranalyzer.s3.us-east-2.amazonaws.com/%svs%saway.png' % id1, id2
+    memory_to_aws(img_data, '{}vs{}away.png'.format(id1, id2))
+    return 'https://socceranalyzer.s3.us-east-2.amazonaws.com/{}vs{}away.png'.format(id1, id2)
 
 
 def teamGraphs(stats, id1, id2, team1, team2):

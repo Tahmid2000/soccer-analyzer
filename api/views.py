@@ -93,11 +93,11 @@ def teams(request, pk):
 def teamsH2H(request, id1, id2):
     teamStats = TeamH2HStats.objects.filter(id1=id1, id2=id2).first()
     teamFixtures = TeamH2HFixtures.objects.filter(id1=id1, id2=id2)
-    timediff = 0
     Team.objects.filter(team_id=id1).update(clicks=F('clicks') + 1)
     Team.objects.filter(team_id=id2).update(clicks=F('clicks') + 1)
     team1 = Team.objects.filter(team_id=id1).first()
     team2 = Team.objects.filter(team_id=id2).first()
+    timediff = 0
     if teamStats:
         now = datetime.datetime.utcnow().replace(tzinfo=utc)
         timediff = (now - teamStats.last_updated).days
@@ -105,15 +105,21 @@ def teamsH2H(request, id1, id2):
         data = teamsInfo(id1, id2)
         stats = data['stats']
         fixtures = data['fixtures']
-        team_graphs = teamGraphs(stats, id1, id1, team1.team_name, team2.team_name)
+        team_graphs = teamGraphs(
+            stats, id1, id1, team1.team_name, team2.team_name)
         if TeamH2HStats.objects.filter(id1=id1, id2=id2).count() == 0:
-            statsSaved = TeamH2HStats(id1=id1, id2=id2, total_games=stats['total_games'], home_id1_games=stats['home_id1_games'], away_id1_games=stats['away_id1_games'], home_id1_wins=stats['home_id1_wins'], away_id1_wins=stats['away_id1_wins'], home_id1_draws=stats['home_id1_draws'], away_id1_draws=stats['away_id1_draws'], home_id1_losses=stats['home_id1_losses'], away_id1_losses=stats['away_id1_losses'], home_id1_goals_for=stats['home_id1_goals_for'], home_id1_goals_against=stats['home_id1_goals_against'], away_id1_goals_for=stats['away_id1_goals_for'], away_id1_goals_against=stats['away_id1_goals_against'], home_id2_games=stats['home_id2_games'], away_id2_games=stats['away_id2_games'], home_id2_wins=stats['home_id2_wins'], away_id2_wins=stats['away_id2_wins'], home_id2_draws=stats['home_id2_draws'], away_id2_draws=stats['away_id2_draws'], home_id2_losses=stats['home_id2_losses'], away_id2_losses=stats['away_id2_losses'], home_id2_goals_for=stats['home_id2_goals_for'], home_id2_goals_against=stats['home_id2_goals_against'], away_id2_goals_for=stats['away_id2_goals_for'], away_id2_goals_against=stats['away_id2_goals_against'], id1_graph_path=team_graphs['team1'], id2_graph_path=team_graphs['team2'], total_graph_path=team_graphs['total'], last_updated=datetime.datetime.now())
+            statsSaved = TeamH2HStats(id1=id1, id2=id2, total_games=stats['total_games'], home_id1_games=stats['home_id1_games'], away_id1_games=stats['away_id1_games'], home_id1_wins=stats['home_id1_wins'], away_id1_wins=stats['away_id1_wins'], home_id1_draws=stats['home_id1_draws'], away_id1_draws=stats['away_id1_draws'], home_id1_losses=stats['home_id1_losses'], away_id1_losses=stats['away_id1_losses'], home_id1_goals_for=stats['home_id1_goals_for'], home_id1_goals_against=stats['home_id1_goals_against'], away_id1_goals_for=stats['away_id1_goals_for'], away_id1_goals_against=stats['away_id1_goals_against'], home_id2_games=stats['home_id2_games'],
+                                      away_id2_games=stats['away_id2_games'], home_id2_wins=stats['home_id2_wins'], away_id2_wins=stats['away_id2_wins'], home_id2_draws=stats['home_id2_draws'], away_id2_draws=stats['away_id2_draws'], home_id2_losses=stats['home_id2_losses'], away_id2_losses=stats['away_id2_losses'], home_id2_goals_for=stats['home_id2_goals_for'], home_id2_goals_against=stats['home_id2_goals_against'], away_id2_goals_for=stats['away_id2_goals_for'], away_id2_goals_against=stats['away_id2_goals_against'], id1_graph_path=team_graphs['team1'], id2_graph_path=team_graphs['team2'], total_graph_path=team_graphs['total'], last_updated=datetime.datetime.now())
             statsSaved.save()
-        TeamH2HStats.objects.filter(id1=id1, id2=id2).update(id1=id1, id2=id2, total_games=stats['total_games'], home_id1_games=stats['home_id1_games'], away_id1_games=stats['away_id1_games'], home_id1_wins=stats['home_id1_wins'], away_id1_wins=stats['away_id1_wins'], home_id1_draws=stats['home_id1_draws'], away_id1_draws=stats['away_id1_draws'], home_id1_losses=stats['home_id1_losses'], away_id1_losses=stats['away_id1_losses'], home_id1_goals_for=stats['home_id1_goals_for'], home_id1_goals_against=stats['home_id1_goals_against'], away_id1_goals_for=stats['away_id1_goals_for'], away_id1_goals_against=stats['away_id1_goals_against'], home_id2_games=stats['home_id2_games'], away_id2_games=stats['away_id2_games'], home_id2_wins=stats['home_id2_wins'], away_id2_wins=stats['away_id2_wins'], home_id2_draws=stats['home_id2_draws'], away_id2_draws=stats['away_id2_draws'], home_id2_losses=stats['home_id2_losses'], away_id2_losses=stats['away_id2_losses'], home_id2_goals_for=stats['home_id2_goals_for'], home_id2_goals_against=stats['home_id2_goals_against'], away_id2_goals_for=stats['away_id2_goals_for'], away_id2_goals_against=stats['away_id2_goals_against'], id1_graph_path=team_graphs['team1'], id2_graph_path=team_graphs['team2'], total_graph_path=team_graphs['total'], last_updated=datetime.datetime.now())
-        difference = len(fixtures) - TeamH2HFixtures.objects.filter(id1=id1, id2=id2).count()
+        else:
+            TeamH2HStats.objects.filter(id1=id1, id2=id2).update(id1=id1, id2=id2, total_games=stats['total_games'], home_id1_games=stats['home_id1_games'], away_id1_games=stats['away_id1_games'], home_id1_wins=stats['home_id1_wins'], away_id1_wins=stats['away_id1_wins'], home_id1_draws=stats['home_id1_draws'], away_id1_draws=stats['away_id1_draws'], home_id1_losses=stats['home_id1_losses'], away_id1_losses=stats['away_id1_losses'], home_id1_goals_for=stats['home_id1_goals_for'], home_id1_goals_against=stats['home_id1_goals_against'], away_id1_goals_for=stats['away_id1_goals_for'], away_id1_goals_against=stats['away_id1_goals_against'], home_id2_games=stats[
+                'home_id2_games'], away_id2_games=stats['away_id2_games'], home_id2_wins=stats['home_id2_wins'], away_id2_wins=stats['away_id2_wins'], home_id2_draws=stats['home_id2_draws'], away_id2_draws=stats['away_id2_draws'], home_id2_losses=stats['home_id2_losses'], away_id2_losses=stats['away_id2_losses'], home_id2_goals_for=stats['home_id2_goals_for'], home_id2_goals_against=stats['home_id2_goals_against'], away_id2_goals_for=stats['away_id2_goals_for'], away_id2_goals_against=stats['away_id2_goals_against'], id1_graph_path=team_graphs['team1'], id2_graph_path=team_graphs['team2'], total_graph_path=team_graphs['total'], last_updated=datetime.datetime.now())
+        difference = len(fixtures) - \
+            TeamH2HFixtures.objects.filter(id1=id1, id2=id2).count()
         if difference > 0:
             for fixture in fixtures[-1*difference:]:
-                fixtureSaved = TeamH2HFixtures(id1=id1, id2=id2, league=fixture['league'], date=fixture['date'], fixture_round=fixture['round'], status=fixture['status'], venue=fixture['venue'], home_logo=fixture['home_logo'], away_logo=fixture['away_logo'], score=fixture['score'], last_updated=datetime.datetime.now())
+                fixtureSaved = TeamH2HFixtures(id1=id1, id2=id2, league=fixture['league'], date=fixture['date'], fixture_round=fixture['round'], status=fixture['status'],
+                                               venue=fixture['venue'], home_logo=fixture['home_logo'], away_logo=fixture['away_logo'], score=fixture['score'], last_updated=datetime.datetime.now())
                 fixtureSaved.save()
     returnStatistics = TeamH2HStats.objects.filter(id1=id1, id2=id2).first()
     returnFixtures = TeamH2HFixtures.objects.filter(id1=id1, id2=id2)
@@ -121,6 +127,7 @@ def teamsH2H(request, id1, id2):
     serializerTeam2 = TeamSerializer(team2)
     serializerStatistics = TeamH2HStatsSerializer(returnStatistics)
     serializerFixtures = TeamH2HFixturesSerializer(returnFixtures, many=True)
-    serializerList = {'team1':serializerTeam1.data, 'team2':serializerTeam2.data, 'stats':serializerStatistics.data, 'fixtures':serializerFixtures.data}
-    content = { 'data' : serializerList }
+    serializerList = {'team1': serializerTeam1.data, 'team2': serializerTeam2.data,
+                      'stats': serializerStatistics.data, 'fixtures': serializerFixtures.data}
+    content = {'data': serializerList}
     return Response(content)
