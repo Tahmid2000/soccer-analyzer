@@ -121,7 +121,7 @@ class TeamH2HStats(models.Model):
         default=None, blank=True, null=True)
     id1_graph_path = models.URLField(default=None, blank=True, null=True)
     id2_graph_path = models.URLField(default=None, blank=True, null=True)
-    toal_graph_path = models.URLField(default=None, blank=True, null=True)
+    total_graph_path = models.URLField(default=None, blank=True, null=True)
     last_updated = models.DateTimeField(
         default=None, blank=True, null=True)
 

@@ -8,7 +8,6 @@ class TeamStatistics extends React.Component {
     };
     renderContent = () => {
         if (this.state.quality === "total") {
-            console.log(this.props.teams);
             return (
                 <React.Fragment>
                     <TeamStatisticComparison

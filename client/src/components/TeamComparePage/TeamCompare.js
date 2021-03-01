@@ -25,6 +25,7 @@ class TeamCompare extends React.Component {
     });
   };
   render() {
+    console.log(this.state.stats)
     return (
       <React.Fragment>
         <h1 className="center-align">
