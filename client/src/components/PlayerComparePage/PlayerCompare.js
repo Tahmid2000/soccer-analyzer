@@ -13,7 +13,7 @@ class PlayerCompare extends React.Component {
     width: window.innerWidth
   };
 
-  handleResize = e => {
+  handleResize = () => {
     this.setState({ width: window.innerWidth });
   };
   componentDidMount() {

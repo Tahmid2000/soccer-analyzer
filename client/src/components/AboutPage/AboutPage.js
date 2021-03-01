@@ -1,12 +1,20 @@
 import React from "react";
 import AboutCard from "./AboutCard";
-
+import "./AboutPage.css";
 class AboutPage extends React.Component {
+  state = { width: window.innerWidth };
+  handleResize = () => {
+    this.setState({ width: window.innerWidth });
+  };
+  componentDidMount() {
+    window.addEventListener("resize", this.handleResize);
+  }
   render() {
     return (
       <React.Fragment>
         <div className="container">
-          <div className="row">
+          <h1 className="center-align">Creators</h1>
+          <div className="row negative-margin">
             <div className="col m1"></div>
             <div className="col s12 m4">
               <AboutCard
@@ -19,8 +27,12 @@ class AboutPage extends React.Component {
               />
             </div>
             <div className="col m2"></div>
-            <div className="col s12 m4">
-            <AboutCard
+            <div
+              className={`col s12 m4 ${
+                this.state.width <= 600 ? "negative-margin" : ""
+              }`}
+            >
+              <AboutCard
                 name="Raiyan Mahbub"
                 description="I am a Computer Engineering student at University of Minnesota, graduating in December 2021. "
                 link="raiyan.jpg"
