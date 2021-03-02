@@ -2,9 +2,8 @@ import pandas as pd
 from .playerInfo import *
 
 
-def playerRating(player_id):
+def playerRating(df):
 
-    df = getPlayerInfo(player_id)
     appearances = df['appearances']
     goals_ratio = df['goals'] / appearances
     assists_ratio = df['assists'] / appearances
@@ -50,7 +49,7 @@ def playerRating(player_id):
     return final_rating
 
 
-playerRating(580)  # Cristiano Ronaldo
+# playerRating(580)  # Cristiano Ronaldo
 # playerRating(184798) # Lionel Messi
 # playerRating(184941) # Sergio Ramos
 # playerRating(30594) # Alex Sandro

@@ -12,7 +12,7 @@ class NavBar extends React.Component {
           <div class="nav-wrapper">
             <div className="container">
               <Link to="/" class="brand-logo">
-                Fútbol Analyzer
+                Clasico
               </Link>
               <a href="#" data-target="mobile-demo" class="sidenav-trigger">
                 <i class="material-icons">menu</i>

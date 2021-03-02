@@ -12,9 +12,7 @@ class HomePage extends React.Component {
               <br />
               <br />
               <br />
-              <h1 class="header center black-text text-darken-3">
-                Fútbol Analyzer
-              </h1>
+              <h1 class="header center black-text text-darken-3">Clasico</h1>
               <div class="row center">
                 <h4 class="header col s12 black-text text-darken-3">
                   Analyze statistics between any 2 players or teams

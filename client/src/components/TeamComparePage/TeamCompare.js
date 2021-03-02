@@ -26,36 +26,33 @@ class TeamCompare extends React.Component {
     });
   };
   render() {
-    console.log(this.state.stats)
     return (
       <React.Fragment>
         <h1 className="center-align">
           {`${this.state.team1.team_name} vs. ${this.state.team2.team_name}`}
         </h1>
         <div className="row">
-            <div className="col s1"></div>
-            <div className="col c3 m3">
-                <TeamCompareCard team={this.state.team1}/>
-                <img
-                    className="responsive-img"
-                    src={this.state.stats.id1_graph_path}
-                    alt=""
-                />
-            </div>
-            <div className="col s4">
-                <TeamStatistics 
-                    teams={this.state.stats}
-                />
-            </div>
-            <div className="col s3 m3">
-                <TeamCompareCard team={this.state.team2}/>
-                <img
-                    className="responsive-img"
-                    src={this.state.stats.id2_graph_path}
-                    alt=""
-                />
-            </div>
-            <div className="col s1"></div>
+          <div className="col s1"></div>
+          <div className="col s3 m3">
+            <TeamCompareCard team={this.state.team1} />
+            <img
+              className="responsive-img"
+              src={this.state.stats.id1_graph_path}
+              alt=""
+            />
+          </div>
+          <div className="col s4">
+            <TeamStatistics teams={this.state.stats} />
+          </div>
+          <div className="col s3 m3">
+            <TeamCompareCard team={this.state.team2} />
+            <img
+              className="responsive-img"
+              src={this.state.stats.id2_graph_path}
+              alt=""
+            />
+          </div>
+          <div className="col s1"></div>
         </div>
       </React.Fragment>
     );

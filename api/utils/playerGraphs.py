@@ -144,10 +144,3 @@ def playerGraphs(df, player_id):
     # Strikers/Wingers Rating
     elif (df['position_id'] == 4):
         return attackersGraph(df, player_id)
-
-
-# playerGraphs(580)  # Cristiano Ronaldo
-# playerGraphs(184798)  # Lionel Messi
-# playerGraphs(184941)  # Sergio Ramos
-# playerGraphs(30594)  # Alex Sandro
-# playerGraphs(186029)  # Keylor Navas

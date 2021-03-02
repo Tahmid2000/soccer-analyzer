@@ -43,7 +43,7 @@ def totalGraphs(df, id1, id2, team1, team2):
 
 def team1Graphs(df, id1, id2, team1, team2):
     plt.switch_backend('Agg')
-    fig1, axs = plt.subplots(2, 1, figsize=(10, 7))
+    fig1, axs = plt.subplots(2, 1, figsize=(13, 10))
 
     labels1 = team1, team2, 'Draws'
     sizes1 = [df['home_id1_wins'], df['away_id2_wins'], df['home_id1_draws']]
@@ -73,7 +73,7 @@ def team1Graphs(df, id1, id2, team1, team2):
 
 def team2Graphs(df, id1, id2, team1, team2):
     plt.switch_backend('Agg')
-    fig1, axs = plt.subplots(2, 1, figsize=(10, 7))
+    fig1, axs = plt.subplots(2, 1, figsize=(13, 10))
 
     labels1 = team2, team1, 'Draws'
     sizes1 = [df['home_id2_wins'], df['away_id1_wins'], df['home_id2_draws']]
