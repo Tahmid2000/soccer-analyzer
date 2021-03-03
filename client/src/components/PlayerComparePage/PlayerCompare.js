@@ -5,7 +5,6 @@ import PlayerCompareCard from "./PlayerCompareCard";
 import Statistics from "./Statistics";
 import { clearPlayers } from "../../actions";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 class PlayerCompare extends React.Component {
   state = {
     playerOne: [],

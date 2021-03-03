@@ -12,6 +12,7 @@ class SelectedPlayers extends React.Component {
         >
           <div className="center-align">
             <a
+              href="/#"
               className="waves-effect waves-light btn-large"
               style={{ backgroundColor: "#40916c", color: "white" }}
             >
