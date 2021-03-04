@@ -1,15 +1,14 @@
 FROM node:14.4.0-alpine3.10
-WORKDIR /usr/src/app
+USER root
+WORKDIR /frontend
 
-COPY package*.json ./
+COPY . /frontend
 
 # Installing dependencies
 RUN npm install --silent
-
-# Copy files over
-COPY . .
+RUN npm run build
 
 # Expose port
-EXPOSE 3000
+# EXPOSE 3000
 
-CMD [ "npm", "start" ]
+# CMD [ "npm", "start" ]
