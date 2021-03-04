@@ -13,12 +13,13 @@ def getPlayers(name):
         'x-rapidapi-key': PLAYER_KEY,
         'x-rapidapi-host': "football-pro.p.rapidapi.com"
     }
-
-    response = requests.request(
-        "GET", url, headers=headers, params=querystring)
-
-    data = response.json()['data']
     player_ids = []
+    try:
+        response = requests.request(
+            "GET", url, headers=headers, params=querystring)
+        data = response.json()['data']
+    except requests.exceptions.RequestException as e:
+        return player_ids
     for player in data:
         player_info = {"player_id": player["player_id"],
                        "player_name": player["display_name"],

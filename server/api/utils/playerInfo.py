@@ -48,10 +48,12 @@ def getTeam(team_id):
         'x-rapidapi-key': TEAM_KEY,
         'x-rapidapi-host': "football-pro.p.rapidapi.com"
     }
-
-    response = requests.request(
-        "GET", url, headers=headers, params=querystring)
-    data = response.json()
+    try:
+        response = requests.request(
+            "GET", url, headers=headers, params=querystring)
+        data = response.json()
+    except requests.exceptions.RequestException as e:
+        return ""
     return data['data']["name"]
 
 
@@ -66,9 +68,12 @@ def getPlayerInfo(player_id):
         'x-rapidapi-host': "football-pro.p.rapidapi.com"
     }
 
-    response = requests.request(
-        "GET", url, headers=headers, params=querystring)
-    data = response.json()
+    try:
+        response = requests.request(
+            "GET", url, headers=headers, params=querystring)
+        data = response.json()
+    except requests.exceptions.RequestException as e:
+        return {}
     player_data = data['data']['stats']['data']
 
     appearances = goals = assists = yellow_cards = red_cards = tackles = fouls_committed = total_passes = pass_accuracy = saves = clean_sheets = penalties_saved = dribble_ratio = successful_dribbles = cross_ratio = successful_crosses = duels_ratio = successful_duels = key_passes = count = 0
