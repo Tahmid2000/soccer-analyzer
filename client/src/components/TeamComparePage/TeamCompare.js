@@ -80,11 +80,6 @@ class TeamCompare extends React.Component {
           </div>
           <div className="col s4">
             <TeamStatistics teams={this.state.stats} fixtures={this.state.fixtures}/>
-            <img
-                className="responsive-img"
-                src={this.state.stats.total_graph_path}
-                alt=""
-              />
           </div>
           <div className="col s3 m3">
             <TeamCompareCard team={this.state.team2} />

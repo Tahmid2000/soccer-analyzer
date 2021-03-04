@@ -84,6 +84,11 @@ class TeamStatistics extends React.Component {
               )}
               type="<"
             />
+            <img
+                className="responsive-img"
+                src={this.props.teams.total_graph_path}
+                alt=""
+              />
           </React.Fragment>
         );
       } else if (this.state.quality === "home") {
@@ -172,8 +177,10 @@ class TeamStatistics extends React.Component {
     } else {
       return (
         <React.Fragment>
-          <h4>hello</h4>
-          <TeamFixtures name="Fixtures" teamFixtures={this.props.fixtures} />
+            <TeamFixtures 
+                name="Fixtures" 
+                teamFixtures={this.props.fixtures} 
+            />
         </React.Fragment>
       );
     }
