@@ -34,7 +34,7 @@ class AboutPage extends React.Component {
             >
               <AboutCard
                 name="Tahmid Imran"
-                description="I'm Computer Science student at UT Dallas, graduating in May 2022. I love building full-stack applications like this!"
+                description="I'm a Computer Science student at UT Dallas, graduating in May 2022. I love building full-stack applications like this!"
                 link="tahmid.jpg"
                 portfolio="https://tahmidimran.com"
                 linkedin="https://www.linkedin.com/in/tahmidimran/"
@@ -47,8 +47,8 @@ class AboutPage extends React.Component {
             We made this website to give soccer (or fútbol) fans everywhere to
             put their favorite players and teams head to head. Growing up, we
             supported rival teams so this project gave us a great way to find
-            out who's club is really the best. We hope you enjoy this app as
-            much as we did making it!
+            out who's club is really the best. We hope you enjoy this app half
+            as much as we enjoyed making it because we had a ball!
           </h6>
         </div>
       </React.Fragment>
