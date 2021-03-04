@@ -1,5 +1,6 @@
 import React from "react";
 import TeamStatisticComparison from "./TeamStatisticComparison";
+import TeamFixtures from "./TeamFixtures";
 
 class TeamStatistics extends React.Component {
     state = { quality: "total", type: "statistics" };
@@ -82,6 +83,17 @@ class TeamStatistics extends React.Component {
                 </React.Fragment>
             );
         }
+        else if (this.state.quality === "fixtures") {
+            return (
+                <React.Fragment>
+                    <h4>hello</h4>
+                    <TeamFixtures 
+                        name="Fixtures"
+                        teamFixtures={this.props.fixtures}
+                    />
+                </React.Fragment>
+            );
+        }
         else if (this.state.quality === "home") {
             return (
                 <React.Fragment>
@@ -124,7 +136,7 @@ class TeamStatistics extends React.Component {
                 </React.Fragment>
             );
         }
-        else {
+        else if (this.state.quality === "away") {
             return (
                 <React.Fragment>
                     <TeamStatisticComparison

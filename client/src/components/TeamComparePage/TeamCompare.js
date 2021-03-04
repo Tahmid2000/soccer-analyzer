@@ -51,7 +51,7 @@ class TeamCompare extends React.Component {
               />
             </div>
             <div className="col s12 m4">
-              <TeamStatistics teams={this.state.stats} />
+              <TeamStatistics teams={this.state.stats}/>
               <img
                   className="responsive-img"
                   src={this.state.stats.total_graph_path}
@@ -79,7 +79,7 @@ class TeamCompare extends React.Component {
             />
           </div>
           <div className="col s4">
-            <TeamStatistics teams={this.state.stats} />
+            <TeamStatistics teams={this.state.stats} fixtures={this.state.fixtures}/>
             <img
                 className="responsive-img"
                 src={this.state.stats.total_graph_path}
