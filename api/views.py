@@ -122,7 +122,7 @@ def teamsH2H(request, id1, id2):
                                                venue=fixture['venue'], home_logo=fixture['home_logo'], away_logo=fixture['away_logo'], score=fixture['score'], last_updated=now())
                 fixtureSaved.save()
     returnStatistics = TeamH2HStats.objects.filter(id1=id1, id2=id2).first()
-    returnFixtures = TeamH2HFixtures.objects.filter(id1=id1, id2=id2)
+    returnFixtures = TeamH2HFixtures.objects.filter(id1=id1, id2=id2).order_by('-date')
     serializerTeam1 = TeamSerializer(team1)
     serializerTeam2 = TeamSerializer(team2)
     serializerStatistics = TeamH2HStatsSerializer(returnStatistics)
