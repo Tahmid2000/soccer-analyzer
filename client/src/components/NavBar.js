@@ -14,7 +14,7 @@ class NavBar extends React.Component {
               <Link to="/" class="brand-logo">
                 Clasico
               </Link>
-              <a href="#" data-target="mobile-demo" class="sidenav-trigger">
+              <a href="/#" data-target="mobile-demo" class="sidenav-trigger">
                 <i class="material-icons">menu</i>
               </a>
               <ul

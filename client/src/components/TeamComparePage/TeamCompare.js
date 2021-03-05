@@ -7,25 +7,43 @@ import { clearTeams } from "../../actions";
 import { connect } from "react-redux";
 
 class TeamCompare extends React.Component {
-  state = { team1: [], team2: [], stats: [], fixtures: [], loading: true };
+  state = {
+    team1: [],
+    team2: [],
+    stats: [],
+    fixtures: [],
+    loading: true,
+    error: false
+  };
   componentDidMount() {
     this.getData();
     this.props.clearTeams();
   }
 
   getData = async () => {
-    const response = await analyzer.get(
-      `/teams/h2h/${this.props.match.params.id1}/${this.props.match.params.id2}`
-    );
-    this.setState({
-      team1: response.data.data.team1,
-      team2: response.data.data.team2,
-      stats: response.data.data.stats,
-      fixtures: response.data.data.fixtures,
-      loading: false
-    });
+    try {
+      const response = await analyzer.get(
+        `/teams/h2h/${this.props.match.params.id1}/${this.props.match.params.id2}`
+      );
+      this.setState({
+        team1: response.data.data.team1,
+        team2: response.data.data.team2,
+        stats: response.data.data.stats,
+        fixtures: response.data.data.fixtures,
+        loading: false,
+        error: false
+      });
+    } catch (err) {
+      this.setState({ error: true });
+    }
   };
   renderContent() {
+    if (this.state.error)
+      return (
+        <React.Fragment>
+          <h1>An error has occured.</h1>
+        </React.Fragment>
+      );
     if (this.state.width <= 600) {
       return (
         <React.Fragment>
@@ -51,18 +69,19 @@ class TeamCompare extends React.Component {
               />
             </div>
             <div className="col s12 m4">
-              <TeamStatistics teams={this.state.stats}/>
+              <TeamStatistics teams={this.state.stats} />
               <img
-                  className="responsive-img"
-                  src={this.state.stats.total_graph_path}
-                  alt=""
-                />
+                className="responsive-img"
+                src={this.state.stats.total_graph_path}
+                alt=""
+              />
             </div>
             <div className="col s12 m1"></div>
           </div>
         </React.Fragment>
       );
     }
+
     return (
       <React.Fragment>
         <h1 className="center-align">
@@ -79,12 +98,15 @@ class TeamCompare extends React.Component {
             />
           </div>
           <div className="col s4">
-            <TeamStatistics teams={this.state.stats} fixtures={this.state.fixtures}/>
+            <TeamStatistics
+              teams={this.state.stats}
+              fixtures={this.state.fixtures}
+            />
             <img
-                className="responsive-img"
-                src={this.state.stats.total_graph_path}
-                alt=""
-              />
+              className="responsive-img"
+              src={this.state.stats.total_graph_path}
+              alt=""
+            />
           </div>
           <div className="col s3 m3">
             <TeamCompareCard team={this.state.team2} />

@@ -17,7 +17,7 @@ def getFixtures(data, id1, id2):
 def getStats(data, id1, id2):
     teams = data["teams"]
     total_games = teams[0]['statistics']['played']['total']
-    
+
     home_id1_games = teams[0]['statistics']['played']['home']
     away_id1_games = teams[0]['statistics']['played']['away']
     home_id1_wins = teams[0]['statistics']['wins']['home']
@@ -78,7 +78,9 @@ def teamsInfo(id1, id2):
         'x-rapidapi-host': "api-football-v1.p.rapidapi.com"
     }
 
-    response = requests.request("GET", url, headers=headers)
-
-    data = response.json()["api"]
+    try:
+        response = requests.request("GET", url, headers=headers)
+        data = response.json()["api"]
+    except requests.exceptions.RequestException as e:
+        return {}
     return {"stats": getStats(data, id1, id2), "fixtures": getFixtures(data, id1, id2)}
