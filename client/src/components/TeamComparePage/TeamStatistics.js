@@ -172,8 +172,7 @@ class TeamStatistics extends React.Component {
     } else {
       return (
         <React.Fragment>
-          <h4>hello</h4>
-          <TeamFixtures name="Fixtures" teamFixtures={this.props.fixtures} />
+          <TeamFixtures fixtures={this.props.fixtures} />
         </React.Fragment>
       );
     }

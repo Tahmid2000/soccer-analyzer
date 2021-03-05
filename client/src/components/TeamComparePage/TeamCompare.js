@@ -25,6 +25,7 @@ class TeamCompare extends React.Component {
       const response = await analyzer.get(
         `/teams/h2h/${this.props.match.params.id1}/${this.props.match.params.id2}`
       );
+
       this.setState({
         team1: response.data.data.team1,
         team2: response.data.data.team2,
@@ -69,7 +70,10 @@ class TeamCompare extends React.Component {
               />
             </div>
             <div className="col s12 m4">
-              <TeamStatistics teams={this.state.stats} />
+              <TeamStatistics
+                teams={this.state.stats}
+                fixtures={this.state.fixtures}
+              />
               <img
                 className="responsive-img"
                 src={this.state.stats.total_graph_path}
