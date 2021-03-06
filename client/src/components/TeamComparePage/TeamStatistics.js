@@ -204,7 +204,7 @@ class TeamStatistics extends React.Component {
             </ul>
           </div>
         </div>
-        <div className="row">
+        <div className={this.state.type === "fixtures" ? "row hide" : "row"}>
           <div className="col s12">
             <ul className="tabs">
               <li className="tab col s4">

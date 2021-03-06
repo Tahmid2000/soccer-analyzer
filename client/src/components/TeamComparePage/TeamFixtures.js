@@ -8,8 +8,10 @@ class TeamFixtures extends React.Component {
     });
     return (
       <React.Fragment>
-        <h4>{this.props.name}</h4>
-        <div className="row">{renderedList}</div>
+        <h4>Fixtures</h4>
+        <div className="row">
+            {renderedList}
+        </div>
       </React.Fragment>
     );
   }
