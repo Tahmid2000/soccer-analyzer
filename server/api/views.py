@@ -105,8 +105,11 @@ def teamsH2H(request, id1, id2):
         data = teamsInfo(id1, id2)
         stats = data['stats']
         fixtures = data['fixtures']
-        team_graphs = teamGraphs(
-            stats, id1, id1, team1.team_name, team2.team_name)
+        if stats['total_games'] != 0:
+            team_graphs = teamGraphs(
+                stats, id1, id1, team1.team_name, team2.team_name)
+        else:
+            team_graphs = {'total': None, 'team1': None, 'team2': None}
         if TeamH2HStats.objects.filter(id1=id1, id2=id2).count() == 0:
             statsSaved = TeamH2HStats(id1=id1, id2=id2, total_games=stats['total_games'], home_id1_games=stats['home_id1_games'], away_id1_games=stats['away_id1_games'], home_id1_wins=stats['home_id1_wins'], away_id1_wins=stats['away_id1_wins'], home_id1_draws=stats['home_id1_draws'], away_id1_draws=stats['away_id1_draws'], home_id1_losses=stats['home_id1_losses'], away_id1_losses=stats['away_id1_losses'], home_id1_goals_for=stats['home_id1_goals_for'], home_id1_goals_against=stats['home_id1_goals_against'], away_id1_goals_for=stats['away_id1_goals_for'], away_id1_goals_against=stats['away_id1_goals_against'], home_id2_games=stats['home_id2_games'],
                                       away_id2_games=stats['away_id2_games'], home_id2_wins=stats['home_id2_wins'], away_id2_wins=stats['away_id2_wins'], home_id2_draws=stats['home_id2_draws'], away_id2_draws=stats['away_id2_draws'], home_id2_losses=stats['home_id2_losses'], away_id2_losses=stats['away_id2_losses'], home_id2_goals_for=stats['home_id2_goals_for'], home_id2_goals_against=stats['home_id2_goals_against'], away_id2_goals_for=stats['away_id2_goals_for'], away_id2_goals_against=stats['away_id2_goals_against'], id1_graph_path=team_graphs['team1'], id2_graph_path=team_graphs['team2'], total_graph_path=team_graphs['total'], last_updated=now())
@@ -122,7 +125,8 @@ def teamsH2H(request, id1, id2):
                                                venue=fixture['venue'], home_logo=fixture['home_logo'], away_logo=fixture['away_logo'], score=fixture['score'], last_updated=now())
                 fixtureSaved.save()
     returnStatistics = TeamH2HStats.objects.filter(id1=id1, id2=id2).first()
-    returnFixtures = TeamH2HFixtures.objects.filter(id1=id1, id2=id2).order_by('-date')
+    returnFixtures = TeamH2HFixtures.objects.filter(
+        id1=id1, id2=id2).order_by('-date')
     serializerTeam1 = TeamSerializer(team1)
     serializerTeam2 = TeamSerializer(team2)
     serializerStatistics = TeamH2HStatsSerializer(returnStatistics)
