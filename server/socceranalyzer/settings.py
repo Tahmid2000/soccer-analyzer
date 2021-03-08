@@ -55,12 +55,14 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'socceranalyzer.urls'
-
+""" 'DIRS': [
+    os.path.join('../', BASE_DIR, 'client/build')
+], """
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join('../', BASE_DIR, 'client/build')
+            os.path.join(BASE_DIR, 'client/build')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -126,7 +128,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join('../', BASE_DIR, 'client/build/static')
+    os.path.join(BASE_DIR, 'client/build/static')
 ]
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000"

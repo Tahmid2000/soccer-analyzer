@@ -55,7 +55,7 @@ def playerStats(request, id):
     if player1.last_updated:
         now_time = now()
         timediff = (now_time - player1.last_updated).days
-    if not player1.last_updated or timediff >= 2:
+    if not player1.last_updated or timediff >= 1:
         stats = getPlayerInfo(id)
         team_name = getTeam(stats['team_id'])
         player1_rating = playerRating(stats)
@@ -101,7 +101,7 @@ def teamsH2H(request, id1, id2):
     if teamStats:
         now_time = now()
         timediff = (now_time - teamStats.last_updated).days
-    if not teamStats or timediff >= 2:
+    if not teamStats or timediff >= 1:
         data = teamsInfo(id1, id2)
         stats = data['stats']
         fixtures = data['fixtures']
