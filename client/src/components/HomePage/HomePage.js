@@ -41,12 +41,12 @@ class HomePage extends React.Component {
                   </p>
                   <Link to="/players" exact>
                     <div className="center-align">
-                      <a
+                      <button
                         className="waves-effect waves-light btn-large"
                         style={{ backgroundColor: "#40916c", color: "white" }}
                       >
                         <strong>Take me there</strong>
-                      </a>
+                      </button>
                     </div>
                   </Link>
                 </div>
@@ -65,12 +65,12 @@ class HomePage extends React.Component {
                   </p>
                   <Link to="/teams" exact>
                     <div className="center-align">
-                      <a
+                      <button
                         className="waves-effect waves-light btn-large"
                         style={{ backgroundColor: "#40916c", color: "white" }}
                       >
                         <strong>Take me there</strong>
-                      </a>
+                      </button>
                     </div>
                   </Link>
                 </div>
@@ -84,9 +84,7 @@ class HomePage extends React.Component {
         <div class="parallax-container valign-wrapper">
           <div class="section no-pad-bot">
             <div class="container">
-              <div class="row center">
-                <h5 class="header col s12 light"></h5>
-              </div>
+              <div class="row center"></div>
             </div>
           </div>
           <div class="parallax">

@@ -6,6 +6,8 @@ const playersReducer = (state = [], action) => {
       return action.payload;
     case "CLEAR_PLAYERS":
       return [];
+    case "ERROR_PLAYERS":
+      return [];
     default:
       return state;
   }
@@ -16,6 +18,8 @@ const teamsReducer = (state = [], action) => {
     case "FETCH_TEAMS":
       return action.payload;
     case "CLEAR_TEAMS":
+      return [];
+    case "ERROR_TEAMS":
       return [];
     default:
       return state;
@@ -56,5 +60,5 @@ export default combineReducers({
   players: playersReducer,
   teams: teamsReducer,
   selectedPlayers: selectedPlayersReducer,
-  selectedTeams: selectedTeamsReducer 
+  selectedTeams: selectedTeamsReducer
 });

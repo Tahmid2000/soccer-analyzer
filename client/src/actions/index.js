@@ -2,8 +2,12 @@ import analyzer from "../apis/analyzer";
 
 export const fetchPlayers = term => {
   return async dispatch => {
-    const response = await analyzer.get(`/players/${term}`);
-    dispatch({ type: "FETCH_PLAYERS", payload: response.data });
+    try {
+      const response = await analyzer.get(`/players/${term}`);
+      dispatch({ type: "FETCH_PLAYERS", payload: response.data });
+    } catch (err) {
+      dispatch({ type: "ERROR_PLAYERS", payload: [] });
+    }
   };
 };
 
@@ -30,8 +34,12 @@ export const clearPlayers = () => {
 
 export const fetchTeams = term => {
   return async dispatch => {
-    const response = await analyzer.get(`/teams/${term}`);
-    dispatch({ type: "FETCH_TEAMS", payload: response.data });
+    try {
+      const response = await analyzer.get(`/teams/${term}`);
+      dispatch({ type: "FETCH_TEAMS", payload: response.data });
+    } catch (err) {
+      dispatch({ type: "ERROR_TEAMS", payload: [] });
+    }
   };
 };
 

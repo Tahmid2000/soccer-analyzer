@@ -5,13 +5,13 @@ import PlayerCompareCard from "./PlayerCompareCard";
 import Statistics from "./Statistics";
 import { clearPlayers } from "../../actions";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 class PlayerCompare extends React.Component {
   state = {
     playerOne: [],
     playerTwo: [],
     loading: true,
-    width: window.innerWidth
+    width: window.innerWidth,
+    error: false
   };
 
   handleResize = () => {
@@ -24,19 +24,30 @@ class PlayerCompare extends React.Component {
   }
 
   getData = async () => {
-    const response1 = await analyzer.get(
-      `/player/stats/${this.props.match.params.id1}`
-    );
-    const response2 = await analyzer.get(
-      `/player/stats/${this.props.match.params.id2}`
-    );
-    this.setState({
-      playerOne: response1.data,
-      playerTwo: response2.data,
-      loading: false
-    });
+    try {
+      const response1 = await analyzer.get(
+        `/player/stats/${this.props.match.params.id1}`
+      );
+      const response2 = await analyzer.get(
+        `/player/stats/${this.props.match.params.id2}`
+      );
+      this.setState({
+        playerOne: response1.data,
+        playerTwo: response2.data,
+        loading: false,
+        error: false
+      });
+    } catch (err) {
+      this.setState({ error: true });
+    }
   };
   renderContent() {
+    if (this.state.error)
+      return (
+        <React.Fragment>
+          <h1>An error has occured.</h1>
+        </React.Fragment>
+      );
     if (this.state.width <= 600) {
       return (
         <React.Fragment>
@@ -82,9 +93,9 @@ class PlayerCompare extends React.Component {
           <div className="col s12 m3">
             <PlayerCompareCard player={this.state.playerOne} />
             <img
-              className="responsive-img"
               src={this.state.playerOne.graph_path}
               alt=""
+              className="responsive-img"
             />
           </div>
           <div className="col s12 m4">
@@ -96,9 +107,9 @@ class PlayerCompare extends React.Component {
           <div className="col s12 m3">
             <PlayerCompareCard player={this.state.playerTwo} />
             <img
-              className="responsive-img"
               src={this.state.playerTwo.graph_path}
               alt=""
+              className="responsive-img"
             />
           </div>
           <div className="col s12 m1"></div>
