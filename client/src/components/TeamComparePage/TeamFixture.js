@@ -4,7 +4,7 @@ class TeamFixture extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <div className="row hoverable" style={{ margin: "1em" }}>
+        <div className="row" style={{ margin: "1em" }}>
           <div className="col s4" style={{ padding: "1em" }}>
             <img
               className="responsive-img"
@@ -19,7 +19,9 @@ class TeamFixture extends React.Component {
                 : this.props.fixture.score}
             </h4>
             <h6>
-              <i>{this.props.fixture.league}</i>
+              <i>
+                {`${this.props.fixture.league} ${this.props.fixture.fixture_round}`}
+              </i>
             </h6>
             <h6>
               <i>{moment(this.props.fixture.date).format("MM/DD/YYYY")}</i>

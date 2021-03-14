@@ -24,7 +24,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'Optional default value')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['http://localhost:3000', "https://clasico.netlify.app"]
 
 
 # Application definition
@@ -130,5 +130,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'client/build/static')
 ]
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000"
+    "http://localhost:3000",
+    "https://clasico.netlify.app"
 ]
